@@ -14,68 +14,32 @@ import java.io.Serializable;
  * @Content: =================================================
  */
 public class IPLocationBean implements Serializable {
-
-
     /**
-     * code : 0
-     * message : 成功
-     * data : {"provinceName":"浙江省","provinceCode":"320000","areaCode":"322100","areaName":"杭州市"}
+     * provinceName : 浙江省
+     * provinceCode : 320000
+     * areaCode : 322100
+     * areaName : 杭州市
      */
 
-    @SerializedName("code")
-    public int code;
-    @SerializedName("message")
-    public String message;
-    @SerializedName("data")
-    public DataBean data;
+    @SerializedName("provinceName")
+    public String provinceName;
+    @SerializedName("provinceCode")
+    public String provinceCode;
+    @SerializedName("areaCode")
+    public String areaCode;
+    @SerializedName("areaName")
+    public String areaName;
 
 
     @Override
     public String toString() {
-        return "IPLocationBean{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
+        return "DataBean{" +
+                "provinceName='" + provinceName + '\'' +
+                ", provinceCode='" + provinceCode + '\'' +
+                ", areaCode='" + areaCode + '\'' +
+                ", areaName='" + areaName + '\'' +
                 '}';
     }
 
-    public static IPLocationBean objectFromData(String str) {
-
-        return new Gson().fromJson(str, IPLocationBean.class);
-    }
-
-    public static class DataBean implements Serializable {
-        /**
-         * provinceName : 浙江省
-         * provinceCode : 320000
-         * areaCode : 322100
-         * areaName : 杭州市
-         */
-
-        @SerializedName("provinceName")
-        public String provinceName;
-        @SerializedName("provinceCode")
-        public String provinceCode;
-        @SerializedName("areaCode")
-        public String areaCode;
-        @SerializedName("areaName")
-        public String areaName;
-
-        public static DataBean objectFromData(String str) {
-
-            return new Gson().fromJson(str, DataBean.class);
-        }
-
-        @Override
-        public String toString() {
-            return "DataBean{" +
-                    "provinceName='" + provinceName + '\'' +
-                    ", provinceCode='" + provinceCode + '\'' +
-                    ", areaCode='" + areaCode + '\'' +
-                    ", areaName='" + areaName + '\'' +
-                    '}';
-        }
-    }
 }
- 
- 
+

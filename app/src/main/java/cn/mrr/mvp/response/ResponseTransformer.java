@@ -9,7 +9,7 @@
  import io.reactivex.functions.Function;
 
  /**
-  * Created by Zaifeng on 2018/2/28.
+  * Created
   * 对返回的数据进行处理，区分异常的情况。
   */
 
@@ -47,7 +47,7 @@
          public ObservableSource<T> apply(Response<T> tResponse) throws Exception {
              int code = tResponse.getCode();
              String message = tResponse.getMsg();
-             if (code == 200) {
+             if (code == 0) {
                  return Observable.just(tResponse.getData());
              } else {
                  return Observable.error(new ApiException(code, message));

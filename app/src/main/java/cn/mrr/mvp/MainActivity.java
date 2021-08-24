@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import cn.mrr.mvp.bean.IPLocationBean;
 import cn.mrr.mvp.block.Contract;
 import cn.mrr.mvp.block.Model;
 import cn.mrr.mvp.block.Presenter;
@@ -36,19 +37,17 @@ public class MainActivity extends AppCompatActivity implements Contract.IView {
 
         presenter.getIPLocation(tvMac, appVersion, requestType);
 
-
-        NetWorkManager.getInstance().init();
-
     }
 
     @Override
     public void getDataSuccess(Object json) {
-        Log.e(TAG, json.toString());
+
+        Log.d(TAG, String.format("正确的 %s ", json));
     }
 
     @Override
-    public void getDataFail() {
-
+    public void getDataFail(String error) {
+        Log.e(TAG, "error   " + error);
     }
 
     @Override

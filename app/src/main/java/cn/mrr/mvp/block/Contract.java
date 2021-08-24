@@ -21,7 +21,7 @@ public class Contract {
     public interface IView {
         void getDataSuccess(Object json);
 
-        void getDataFail();
+        void getDataFail(String error);
     }
 
     public interface BaseModel {
