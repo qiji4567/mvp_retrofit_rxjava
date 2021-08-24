@@ -1,10 +1,13 @@
 package cn.mrr.mvp.network.request;
 
+import java.util.Map;
+
 import cn.mrr.mvp.bean.IPLocationBean;
 import cn.mrr.mvp.response.Response;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * =================================================
@@ -17,7 +20,7 @@ import retrofit2.http.Query;
  */
 public interface Request {
 
-     public static final String HOST = "https://softmbh.komect.com";
+    String HOST = "https://softmbh.komect.com";
 
     /**
      * 获取ip地址接口配置
@@ -28,6 +31,13 @@ public interface Request {
     Observable<Response<IPLocationBean>> getLocation(@Query("tvMac") String tvMac, @Query("appVersion") String appVersion, @Query("requestType") String requestType);
 
 
+    /**
+     * 获取ip地址接口配置第二种写法
+     *
+     * @return
+     */
+    @GET("/softmbh-app/v2/ipLocation?")
+    Observable<Response<IPLocationBean>> getLocationMap(@QueryMap Map<String, Object> map);
 
 
 }

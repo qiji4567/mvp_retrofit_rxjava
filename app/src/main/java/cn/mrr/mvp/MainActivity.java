@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cn.mrr.mvp.bean.IPLocationBean;
 import cn.mrr.mvp.block.Contract;
 import cn.mrr.mvp.block.Model;
@@ -35,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements Contract.IView {
         String requestType = "PUSH-PUB";
         Log.e(TAG, "DDDDDDDDDD");
 
-        presenter.getIPLocation(tvMac, appVersion, requestType);
+//        presenter.getIPLocation(tvMac, appVersion, requestType);
+        Map<String,Object> map = new HashMap<>();
+        map.put("tvMac",tvMac);
+        map.put("appVersion",appVersion);
+        map.put("requestType",requestType);
+        presenter.getIPLocationMap(map);
 
     }
 

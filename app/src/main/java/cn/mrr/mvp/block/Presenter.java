@@ -1,5 +1,7 @@
 package cn.mrr.mvp.block;
 
+import java.util.Map;
+
 import cn.mrr.mvp.network.scheduler.BaseSchedulerProvider;
 import cn.mrr.mvp.response.ResponseTransformer;
 import io.reactivex.disposables.CompositeDisposable;
@@ -47,6 +49,25 @@ public class Presenter {
 
         mDisposable.add(disposable);
     }
+
+
+    public void getIPLocationMap(Map<String,Object> map) {
+        Disposable disposable = model.getIpLocationMap(map)
+                .compose(ResponseTransformer.handleResult())
+                .compose(baseSchedulerProvider.applySchedulers())
+                .subscribe(iPLocationBean -> {
+                    // 处理数据 直接获取到 iPLocationBean
+                    iView.getDataSuccess(iPLocationBean);
+                }, Throwable -> {
+                    //异常
+                    iView.getDataFail(Throwable.getMessage());
+                });
+
+        mDisposable.add(disposable);
+    }
+
+
+
 
 
     public void dispose() {
