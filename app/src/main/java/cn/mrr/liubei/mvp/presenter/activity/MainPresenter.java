@@ -1,33 +1,22 @@
 package cn.mrr.liubei.mvp.presenter.activity;
 
-import java.util.Date;
-
 import javax.inject.Inject;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
 import androidx.annotation.Nullable;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-import cn.mrr.liubei.base.BaseSubscriber;
 import cn.mrr.liubei.base.RxPresenter;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
 import cn.mrr.liubei.net.IdeaApiService;
 import cn.mrr.liubei.net.RetrofitHelper;
-import cn.mvp.network.net.common.CommonService;
 import cn.mvp.network.net.common.ResponseObserver;
-import cn.mvp.network.net.common.RetrofitService;
 import cn.mvp.network.net.module.BaseBean;
-import cn.mvp.network.net.module.LoginResponse;
 import cn.mvp.network.utils.RxUtil;
 import cn.mvp.network.utils.SPUtils;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.Query;
 
 /**
  * 功能描述

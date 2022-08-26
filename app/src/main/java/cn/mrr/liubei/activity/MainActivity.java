@@ -57,7 +57,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
             LogUtils.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
             LogUtils.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
             LogUtils.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
-            LogUtils.e(TAG, "手机IMEI：" + SystemUtil.getIMEI(getApplicationContext()));
+//            LogUtils.e(TAG, "手机IMEI：" + SystemUtil.getIMEI(getApplicationContext()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,9 +69,9 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
      */
     @OnClick(R.id.loginButton)
     public void onClick(View view) {
-//        if (super.onViewClick()) {
-//            return;
-//        }
+        if (super.onViewClick()) {
+            return;
+        }
         switch (view.getId()) {
             case R.id.loginButton:
                 //          登录
