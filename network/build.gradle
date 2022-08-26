@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        //        线上环境
+        online {
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //对应服务器地址
+            buildConfigField "String", "HOST", "\"" + rootProject.ext.buildType["online"] + "\""
+        }
+//        测试环境
+        textapp {
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //对应服务器地址
+            buildConfigField "String", "HOST", "\"" + rootProject.ext.buildType["test"] + "\""
+            debuggable true
+        }
+//        开发环境
+        develop {
+            //是否输出日志
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            //对应服务器地址
+            buildConfigField "String", "HOST", "\"" + rootProject.ext.buildType["develop"] + "\""
+            debuggable true
+        }
+    }
+}
+
+dependencies {
+
+
+    api rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["material"]
+    api rootProject.ext.dependencies["constraintlayout"]
+
+//    view绑定
+//    api rootProject.ext.dependencies["butterknife"]
+//    api rootProject.ext.dependencies["butterknife-compiler"]
+    //网络http
+    api rootProject.ext.dependencies["rxjava2:rxjava"]
+    api rootProject.ext.dependencies["rxjava2:rxandroid"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit2:adapter-rxjava"]
+    api rootProject.ext.dependencies["retrofit2:converter-gson"]
+    api rootProject.ext.dependencies["okhttp3:logging-interceptor"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+//    文件下载
+    api rootProject.ext.dependencies["filedownloader"]
+//base64加密
+    api rootProject.ext.dependencies["commons-codec"]
+
+    //弹框库
+    api rootProject.ext.dependencies["XPopup"]
+//    图片加载
+    api rootProject.ext.dependencies["glide:glide"]
+    annotationProcessor rootProject.ext.dependencies["glide:compiler"]
+
+
+    // fragmentation和activity
+    api rootProject.ext.dependencies["fragmentationx"]
+    api rootProject.ext.dependencies["fragmentation-swipeback"]
+
+}

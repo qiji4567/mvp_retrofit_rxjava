@@ -1,0 +1,59 @@
+引用jar包：todo api 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+
+/* SwipeMenuItem modifyItem = new SwipeMenuItem(mContext);
+            // 各种文字和图标属性设置。
+            leftMenu.addMenuItem(deleteItem); // 在Item左侧添加一个菜单。*/
+
+
+                // 在Item右侧添加一个菜单。
+                // 1.编辑
+                // 各种文字和图标属性设置。
+                SwipeMenuItem modifyItem = new SwipeMenuItem(VaccinationActivity.this)
+                        .setBackgroundColor(getResources().getColor(R.color.green))
+                        .setText("用药登记")
+                        .setTextColor(Color.WHITE)
+                        .setTextSize(15) // 文字大小。
+                        .setWidth(300)
+                        .setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                rightMenu.addMenuItem(modifyItem);
+                // 注意：哪边不想要菜单，那么不要添加即可。
+
+
+ 三方库版本更新 todo github地址： https://github.com/azhon/AppUpdate
+
+
+          UpdateConfiguration configuration = new UpdateConfiguration()
+
+          DownloadManager manager = DownloadManager.getInstance(this);
+          manager.setApkName("appupdate.apk")
+                  .setApkUrl("https://raw.githubusercontent.com/azhon/AppUpdate/main/apk/appupdate.apk")
+                  .setSmallIcon(R.mipmap.ic_launcher)
+                  //非必须参数
+                  .setConfiguration(configuration)
+                  //设置了此参数，那么会自动判断是否需要更新弹出提示框
+                  .setApkVersionCode()
+                  .setApkDescription("更新描述信息(取服务端返回数据)")
+                  .download();
+
+
+
+    三方库弹框   todo github地址：   https://github.com/li-xiaojun/XPopup
+
+     mProgressDialog = (LoadingPopupView) new XPopup.Builder(activity)
+                        .isLightNavigationBar(true)
+                        .isViewMode(true)
+                        .asLoading(null, R.layout.dialog_progress)
+                        .show();
+                ImageView loadingImageView = mProgressDialog.findViewById(R.id.loadingImageView);
+                Glide.with(activity).asGif().load(R.drawable.progress).into(loadingImageView);//icon为gif图
+                TextView tv_loadingmsg = mProgressDialog.findViewById(R.id.tv_loadingmsg);
+                tv_loadingmsg.setText("加载中...");
+
+                String simpleName = activity.getClass().getSimpleName();
+                if (TextUtils.equals("HomePageActivity", simpleName)) {
+                    mProgressDialog.delayDismissWith(2000, new Runnable() {
+                        @Override
+                        public void run() {
+                            LogUtils.e("我消失了！！！" + simpleName);
+                        }
+                    });

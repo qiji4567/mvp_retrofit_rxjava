@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mvp_retrofit_rxjava</string>
+    <string name="remote_login_logout">异地登录，已登出</string>
 </resources>
