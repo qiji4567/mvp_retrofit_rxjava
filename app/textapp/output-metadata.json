@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "cn.mvp.pda",
+  "variantName": "processTextappResources",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 5,
+      "versionName": "1.0.5",
+      "outputFile": "pda-textapp-V1.0.5.apk"
+    }
+  ]
+}
