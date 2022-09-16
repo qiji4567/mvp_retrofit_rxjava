@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_green_5"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+
+            <TextView
+                android:id="@+id/portal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Application Portal"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editUsername"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/line_white_5"
+                android:gravity="left"
+                android:hint="请输入账号"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line_white_5"
+                android:gravity="left"
+                android:hint="请输入密码"
+                android:inputType="number"
+                android:maxLength="8"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_white_5"
+                android:text="登录"
+                android:textColor="#35C2BC" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

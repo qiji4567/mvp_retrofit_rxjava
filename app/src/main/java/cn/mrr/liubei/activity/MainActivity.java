@@ -20,11 +20,6 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
 
     private static final String TAG = "MainActivity";
 
-    @BindView(R.id.editUsername)
-    EditText editUsername;
-    @BindView(R.id.editPassword)
-    EditText editPassword;
-
     @Override
     public void initInject() {
         super.initInject();
@@ -32,7 +27,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
                 .appComponent(MyApplication.getAppComponent())
                 .baseActivityModule(new BaseActivityModule(this))
                 .build()
-                .injectMainActivity(this);
+                .injectActivity(this);
     }
 
     @Override
@@ -43,43 +38,24 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
     @Override
     protected void initialize() {
         showReturn();
-        setTitle("登录页");
-        editUsername.setText("13121146221");
-        editPassword.setText("888888");
+        setTitle("首页");
 
-    }
 
-    private void showSystemParameter() {
-
-        String TAG = "系统参数：";
-        try {
-
-            LogUtils.e(TAG, "手机厂商：" + SystemUtil.getDeviceBrand());
-            LogUtils.e(TAG, "手机型号：" + SystemUtil.getSystemModel());
-            LogUtils.e(TAG, "手机当前系统语言：" + SystemUtil.getSystemLanguage());
-            LogUtils.e(TAG, "Android系统版本号：" + SystemUtil.getSystemVersion());
-//            LogUtils.e(TAG, "手机IMEI：" + SystemUtil.getIMEI(getApplicationContext()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
     /**
      * 点击事件
      */
-    @OnClick(R.id.loginButton)
+    @OnClick(R.id.tv_imageview)
     public void onClick(View view) {
         if (super.onViewClick()) {
             return;
         }
         switch (view.getId()) {
-            case R.id.loginButton:
+            case R.id.tv_imageview:
                 //          登录
-                String username = editUsername.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
-
-                mPresenter.login(MainActivity.this, username, password);
+                startActivity(mContext, ActionBarActivity.class, false);
                 break;
             default:
                 break;
@@ -90,7 +66,5 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
 
     @Override
     public void updateUi(Object bean, int typeCode) {
-        showMsg(bean.toString());
-        startActivity(this, ActionBarActivity.class, false);
     }
 }

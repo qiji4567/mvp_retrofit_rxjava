@@ -1,5 +1,6 @@
 package cn.mrr.liubei.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,8 +28,13 @@ public class ExitActivity extends BaseMVPActivity {
 
     @Override
     protected void initialize() {
-        StatusBarUtil.setColor(this, Color.parseColor("#00000000"), 0);
-        StatusBarUtil.setLightStatusBar(this, true);
+        UltimateBarX.create(UltimateBarX.STATUS_BAR)        // 设置状态栏
+                .fitWindow(true)                                // 布局是否侵入状态栏（true 不侵入，false 侵入）
+                .bgColor(Color.BLACK)                           // 状态栏背景颜色（色值）
+                .bgColorRes(R.color.colorPrimary)                // 状态栏背景颜色（资源id）
+                .bgRes(R.drawable.bg_home_iv)                  // 状态栏背景 drawable
+                .light(false)                                   // light模式（状态栏字体灰色 Android 6.0 以上支持）
+                .apply(this);
     }
 
     @OnClick({R.id.tv_de_exit, R.id.tv_de_logBack})
@@ -44,20 +50,15 @@ public class ExitActivity extends BaseMVPActivity {
                 finish();
                 break;
             case R.id.tv_de_logBack:
-                finish();
                 //清除记录存储
 //                Manager.setUserToken(this, "");
-//                AppActivityTaskManager.getInstance().removeAllActivity();
-                UltimateBarX.create(UltimateBarX.STATUS_BAR)        // 设置状态栏
-                        .fitWindow(true)                                // 布局是否侵入状态栏（true 不侵入，false 侵入）
-                        .bgColor(Color.BLACK)                           // 状态栏背景颜色（色值）
-                        .bgColorRes(R.color.colorPrimary)                // 状态栏背景颜色（资源id）
-                        .bgRes(R.drawable.bg_home_iv)                  // 状态栏背景 drawable
-                        .light(false)                                   // light模式（状态栏字体灰色 Android 6.0 以上支持）
-                        .apply(this);
-                //自定义跳转登录
-//                Intent intent = new Intent(this, LoginActivity.class);
-//                startActivity(intent);
+                AppActivityTaskManager.getInstance().removeAllActivity();
+
+//                自定义跳转登录
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            default:
                 break;
         }
     }

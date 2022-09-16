@@ -7,74 +7,22 @@
 
     <include layout="@layout/base_title" />
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="欢迎来到自研开发" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_green_5"
-            android:orientation="vertical"
-            android:padding="15dp">
-
-
-            <TextView
-                android:id="@+id/portal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Application Portal"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editUsername"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/line_white_5"
-                android:gravity="left"
-                android:hint="请输入账号"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="#fff"
-                android:textColorHint="#fff"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/editPassword"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/line_white_5"
-                android:gravity="left"
-                android:hint="请输入密码"
-                android:inputType="number"
-                android:maxLength="8"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="#fff"
-                android:textColorHint="#fff"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_white_5"
-                android:text="登录"
-                android:textColor="#35C2BC" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="跳转imageview" />
 
 
 </LinearLayout>

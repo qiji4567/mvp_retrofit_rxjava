@@ -40,13 +40,4 @@ public class ActionBarActivity extends BaseMVPActivity {
         viewPager.setAdapter(fragmentAdapter);
     }
 
-
-    //    将StatusBar设置为透明
-    public void setStatusBarTranslucent() {
-        StatusBarUtil.setTranslucentForImageViewInFragment(this,
-                0, null);
-        StatusBarUtil.setLightMode(this);
-    }
-
-
 }
