@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.zackratos.ultimatebarx.library.UltimateBarX;
+
 import butterknife.OnClick;
 import cn.mrr.liubei.R;
 import cn.mrr.liubei.base.BaseMVPActivity;
@@ -45,13 +47,21 @@ public class ExitActivity extends BaseMVPActivity {
                 finish();
                 //清除记录存储
 //                Manager.setUserToken(this, "");
-                AppActivityTaskManager.getInstance().removeAllActivity();
+//                AppActivityTaskManager.getInstance().removeAllActivity();
+                UltimateBarX.create(UltimateBarX.STATUS_BAR)        // 设置状态栏
+                        .fitWindow(true)                                // 布局是否侵入状态栏（true 不侵入，false 侵入）
+                        .bgColor(Color.BLACK)                           // 状态栏背景颜色（色值）
+                        .bgColorRes(R.color.colorPrimary)                // 状态栏背景颜色（资源id）
+                        .bgRes(R.drawable.bg_home_iv)                  // 状态栏背景 drawable
+                        .light(false)                                   // light模式（状态栏字体灰色 Android 6.0 以上支持）
+                        .apply(this);
                 //自定义跳转登录
 //                Intent intent = new Intent(this, LoginActivity.class);
 //                startActivity(intent);
                 break;
         }
     }
+
 
 
     @Override

@@ -44,7 +44,8 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
     protected void initialize() {
         showReturn();
         setTitle("登录页");
-
+        editUsername.setText("13121146221");
+        editPassword.setText("888888");
 
     }
 
@@ -78,7 +79,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
                 String username = editUsername.getText().toString().trim();
                 String password = editPassword.getText().toString().trim();
 
-                mPresenter.login(this,username, password);
+                mPresenter.login(MainActivity.this, username, password);
                 break;
             default:
                 break;
@@ -90,5 +91,6 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
     @Override
     public void updateUi(Object bean, int typeCode) {
         showMsg(bean.toString());
+        startActivity(this, ActionBarActivity.class, false);
     }
 }

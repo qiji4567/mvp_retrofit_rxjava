@@ -25,7 +25,7 @@ import cn.mrr.liubei.manager.AppActivityTaskManager;
 import cn.mrr.liubei.utils.StatusBarUtil;
 import me.yokeyword.fragmentation.SupportActivity;
 
-public abstract class BaseActivity extends RxAppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends SupportActivity implements View.OnClickListener {
 
     @Nullable
     @BindView(R.id.iv_bt_return)
@@ -61,8 +61,17 @@ public abstract class BaseActivity extends RxAppCompatActivity implements View.O
         initialize();
     }
 
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        setStatusBar();
+    }
+
     public void create(Bundle savedInstanceState){}
 
+    protected void setStatusBar() {
+        com.jaeger.library.StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+    }
 
     private void initLayout(){
         setContentView(R.layout.base_activity);

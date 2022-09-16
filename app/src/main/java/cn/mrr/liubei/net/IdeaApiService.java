@@ -39,8 +39,12 @@ public interface IdeaApiService {
 
     //登录接口-账号密码
     @POST("mobile/login")
-    Observable<BaseBean> loginObservable(@Query("username") @NonNull String username,
-                               @Query("password") @NonNull String password);
+    Flowable<BaseBean<MobileCountModel>> login(@Query("username") String username,
+                                               @Query("password") String password);
+    //登录接口-账号密码
+    @POST("mobile/login")
+    Observable<BaseBean> loginObservable(@Query("username")  String username,
+                               @Query("password")  String password);
 //
 //    /**
 //     * 首页-设置页面退出登录
