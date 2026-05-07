@@ -69,6 +69,12 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
     }
 
 
+    /**
+     * 更新UI
+     *
+     * @param bean
+     * @param typeCode
+     */
     @Override
     public void updateUi(Object bean, int typeCode) {
     }
