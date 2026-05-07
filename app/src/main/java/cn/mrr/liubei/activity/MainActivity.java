@@ -15,7 +15,12 @@ import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
 import cn.mrr.liubei.utils.SystemUtil;
 import cn.mvp.network.utils.LogUtils;
 
-
+/**
+ * 描述：
+ *
+ * @author:WangQiang
+ * @date:2017/11/7
+ */
 public class MainActivity extends BaseMVPActivity<MainPresenter> implements BaseContractView<Object> {
 
     private static final String TAG = "MainActivity";
