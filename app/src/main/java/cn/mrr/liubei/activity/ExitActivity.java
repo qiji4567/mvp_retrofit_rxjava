@@ -9,28 +9,19 @@ import cn.mrr.liubei.base.BaseActivity;
 import cn.mrr.liubei.databinding.ActivityExitBinding;
 import cn.mrr.liubei.manager.AppActivityTaskManager;
 
-/**
- * @author 53443
- */
 public class ExitActivity extends BaseActivity {
     private ActivityExitBinding binding;
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_exit;
-    }
+    @Override protected int getLayoutId() { return R.layout.activity_exit; }
 
-    @Override
-    protected void initialize() {
+    @Override protected void initialize() {
         binding = ActivityExitBinding.bind(getContentView());
         binding.tvDeExit.setOnClickListener(this::onViewClick);
         binding.tvDeLogBack.setOnClickListener(this::onViewClick);
     }
 
     public void onViewClick(View view) {
-        if (super.onViewClick()) {
-            return;
-        }
+        if (super.onViewClick()) return;
         int id = view.getId();
         if (id == R.id.tv_de_exit) {
             AppActivityTaskManager.getInstance().removeAllActivity();
@@ -41,8 +32,7 @@ public class ExitActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) return false;
         return super.onKeyDown(keyCode, event);
     }

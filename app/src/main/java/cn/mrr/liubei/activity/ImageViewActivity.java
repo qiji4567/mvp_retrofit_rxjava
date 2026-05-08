@@ -6,7 +6,6 @@ import android.widget.SeekBar;
 import cn.mrr.liubei.R;
 import cn.mrr.liubei.base.BaseActivity;
 import cn.mrr.liubei.databinding.ActivityImageViewBinding;
-import cn.mrr.liubei.utils.StatusBarUtil;
 
 public class ImageViewActivity extends BaseActivity {
     private ActivityImageViewBinding binding;
@@ -27,7 +26,6 @@ public class ImageViewActivity extends BaseActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mAlpha = progress;
-                StatusBarUtil.setTranslucentForImageView(ImageViewActivity.this, mAlpha, binding.viewNeedOffset);
                 binding.tvStatusAlpha.setText(String.valueOf(mAlpha));
             }
 
@@ -39,12 +37,11 @@ public class ImageViewActivity extends BaseActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        binding.sbChangeAlpha.setProgress(StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
+
     }
 
     @Override
     protected void setStatusBar() {
-        StatusBarUtil.setTranslucentForImageViewInFragment(this, null);
     }
 
     @Override
@@ -52,6 +49,4 @@ public class ImageViewActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) finish();
         return super.onOptionsItemSelected(item);
     }
-
-
 }

@@ -17,9 +17,13 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
         return new MainPresenter(RetrofitHelper.getApiService(), this);
     }
 
-    @Override protected int getLayoutId() { return R.layout.activity_main; }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
-    @Override protected void initialize() {
+    @Override
+    protected void initialize() {
         binding = ActivityMainBinding.bind(getContentView());
         showReturn();
         setTitle("首页");
@@ -27,13 +31,12 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
     }
 
     public void onClick(View view) {
-        if (super.onViewClick()) {
-            return;
-        }
-        if (view.getId() == R.id.tv_imageview) {
+        if (super.onViewClick()) return;
+        if (view.getId() == R.id.tv_imageview)
             startActivity(mContext, ActionBarActivity.class, false);
-        }
     }
 
-    @Override public void updateUi(Object bean, int typeCode) {}
+    @Override
+    public void updateUi(Object bean, int typeCode) {
+    }
 }

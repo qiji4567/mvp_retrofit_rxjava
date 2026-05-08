@@ -15,13 +15,8 @@ import cn.mrr.liubei.R;
 import cn.mrr.liubei.databinding.BaseActivityBinding;
 import cn.mrr.liubei.databinding.BaseTitleBinding;
 import cn.mrr.liubei.manager.AppActivityTaskManager;
-import cn.mrr.liubei.utils.StatusBarUtil;
 
-/**
- * @author 53443
- */
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
-
+public abstract class  BaseActivity extends AppCompatActivity implements View.OnClickListener {
     private long clickTime = 0;
     protected AppCompatActivity mContext;
     protected BaseActivityBinding baseBinding;
@@ -39,7 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         mContext = this;
         initLayout();
-
         onViewCreated();
         AppActivityTaskManager.getInstance().addActivity(this);
         create(savedInstanceState);
@@ -58,7 +52,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         clickTime = System.currentTimeMillis();
         return false;
     }
-
     public void create(Bundle savedInstanceState) {
     }
 
