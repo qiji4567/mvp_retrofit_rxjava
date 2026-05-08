@@ -1,15 +1,64 @@
+# =========================
+# Android / Gradle build
+# =========================
+.gradle/
+build/
+*/build/
+
+# app / library build output
+app/build/
+network/build/
+
+# APK / AAB outputs
+*.apk
+*.ap_
+*.aab
+
+# Dex / class / generated
+*.dex
+*.class
+bin/
+gen/
+out/
+captures/
+
+# =========================
+# Android Studio / IntelliJ
+# =========================
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*.ipr
+*.iws
+
+# 如果你想保留部分 .idea 配置，可以改成只忽略这些：
+# .idea/caches/
+# .idea/libraries/
+# .idea/modules.xml
+# .idea/workspace.xml
+# .idea/tasks.xml
+# .idea/gradle.xml
+# .idea/misc.xml
+
+# =========================
+# Local config
+# =========================
 local.properties
+*.keystore
+*.jks
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Kotlin / Java
+# =========================
+.kotlin/
