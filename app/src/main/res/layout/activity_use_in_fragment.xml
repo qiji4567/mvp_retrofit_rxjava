@@ -13,12 +13,16 @@
         android:layout_weight="1"
         android:orientation="vertical" />
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:bnbActiveColor="@color/white"
-        app:bnbBackgroundColor="@color/colorPrimary"
-        app:bnbBackgroundStyle="background_style_static" />
+        android:background="@android:color/white"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemTextColor="@color/bottom_nav_color"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/main_bottom_nav_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </LinearLayout>

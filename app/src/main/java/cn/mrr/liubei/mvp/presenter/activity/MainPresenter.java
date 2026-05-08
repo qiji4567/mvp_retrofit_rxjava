@@ -2,16 +2,18 @@ package cn.mrr.liubei.mvp.presenter.activity;
 
 import javax.inject.Inject;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import cn.mrr.liubei.base.BaseObserver;
 import cn.mrr.liubei.base.BaseSubscriber;
 import cn.mrr.liubei.base.RxPresenter;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
+import cn.mrr.liubei.mvp.MobileCountModel;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
 import cn.mrr.liubei.net.IdeaApiService;
 import cn.mrr.liubei.net.RetrofitHelper;
@@ -29,7 +31,8 @@ import io.reactivex.schedulers.Schedulers;
  * @Description
  * @since 2022-08-23
  */
-public class MainPresenter extends RxPresenter<BaseContractView> implements BasePresenter<BaseContractView> {
+public class MainPresenter extends RxPresenter<BaseContractView<MobileCountModel>> implements BasePresenter<BaseContractView<MobileCountModel>>{
+
 
     private IdeaApiService mAppApi;
     private Context mContext;
@@ -40,13 +43,13 @@ public class MainPresenter extends RxPresenter<BaseContractView> implements Base
         this.mContext = mContext;
     }
 
-    public void login(Activity activity, @Nullable String username, @Nullable String password) {
+    public void login(AppCompatActivity activity, @Nullable String username, @Nullable String password) {
         addSubscribe(mAppApi.login(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseSubscriber<BaseBean>(mContext, mView) {
+                .subscribeWith(new BaseObserver<BaseBean<MobileCountModel>>(mContext, mView) {
                     @Override
-                    public void onNext(BaseBean bean) {
+                    public void onNext(BaseBean<MobileCountModel> bean) {
                         super.onNext(bean);
                         if (200 == bean.getCode()) {
                             mView.updateUi(bean.getData(), 0);

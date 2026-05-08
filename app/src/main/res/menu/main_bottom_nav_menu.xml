@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_one"
+        android:icon="@drawable/ic_favorite"
+        android:title="One" />
+
+    <item
+        android:id="@+id/nav_two"
+        android:icon="@drawable/ic_gavel"
+        android:title="Two" />
+
+    <item
+        android:id="@+id/nav_three"
+        android:icon="@drawable/ic_grade"
+        android:title="Three" />
+
+    <item
+        android:id="@+id/nav_four"
+        android:icon="@drawable/ic_group_work"
+        android:title="Four" />
+
+</menu>

@@ -1,81 +1,39 @@
 package cn.mrr.liubei.activity;
 
 import android.view.View;
-import android.widget.EditText;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import cn.mrr.liubei.R;
-import cn.mrr.liubei.application.MyApplication;
+import cn.mrr.liubei.net.RetrofitHelper;
 import cn.mrr.liubei.base.BaseMVPActivity;
-import cn.mrr.liubei.di.component.DaggerBaseActivityComponent;
-import cn.mrr.liubei.module.BaseActivityModule;
+import cn.mrr.liubei.databinding.ActivityMainBinding;
 import cn.mrr.liubei.mvp.presenter.activity.MainPresenter;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
-import cn.mrr.liubei.utils.SystemUtil;
-import cn.mvp.network.utils.LogUtils;
 
-/**
- * 描述：
- *
- * @author:WangQiang
- * @date:2017/11/7
- */
 public class MainActivity extends BaseMVPActivity<MainPresenter> implements BaseContractView<Object> {
-
-    private static final String TAG = "MainActivity";
+    private ActivityMainBinding binding;
 
     @Override
-    public void initInject() {
-        super.initInject();
-        DaggerBaseActivityComponent.builder()
-                .appComponent(MyApplication.getAppComponent())
-                .baseActivityModule(new BaseActivityModule(this))
-                .build()
-                .injectActivity(this);
+    protected MainPresenter createPresenter() {
+        return new MainPresenter(RetrofitHelper.getApiService(), this);
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
+    @Override protected int getLayoutId() { return R.layout.activity_main; }
 
-    @Override
-    protected void initialize() {
+    @Override protected void initialize() {
+        binding = ActivityMainBinding.bind(getContentView());
         showReturn();
         setTitle("首页");
-
-
+        binding.tvImageview.setOnClickListener(this::onClick);
     }
 
-
-    /**
-     * 点击事件
-     */
-    @OnClick(R.id.tv_imageview)
     public void onClick(View view) {
         if (super.onViewClick()) {
             return;
         }
-        switch (view.getId()) {
-            case R.id.tv_imageview:
-                //          登录
-                startActivity(mContext, ActionBarActivity.class, false);
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.tv_imageview) {
+            startActivity(mContext, ActionBarActivity.class, false);
         }
-
     }
 
-
-    /**
-     * 更新UI
-     *
-     * @param bean
-     * @param typeCode
-     */
-    @Override
-    public void updateUi(Object bean, int typeCode) {
-    }
+    @Override public void updateUi(Object bean, int typeCode) {}
 }

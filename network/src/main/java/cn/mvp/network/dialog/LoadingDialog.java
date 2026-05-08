@@ -1,23 +1,16 @@
 package cn.mvp.network.dialog;
 
-import android.app.Activity;
-import android.widget.ImageView;
-import android.widget.TextView;
+import androidx.fragment.app.FragmentActivity;
 
-import com.bumptech.glide.Glide;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.impl.LoadingPopupView;
-
-import cn.mvp.network.R;
-
 
 /**
  * Created by qiji on 2017/5/26.
  * Description:
  */
-
 public class LoadingDialog {
-    //  加载进度的dialog
+
     private LoadingPopupView mProgressDialog;
 
     private static volatile LoadingDialog loadingDialog;
@@ -37,52 +30,39 @@ public class LoadingDialog {
     }
 
     /**
-     * 显示ProgressDialog
+     * 显示 ProgressDialog
      */
-    public void showProgress(Activity activity, String msg) {
-       /* if (context == null || context.isFinishing()) {
+    public void showProgress(FragmentActivity activity, String msg) {
+        if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             return;
-        }*/
-        //在中间弹出的Loading加载框
+        }
+
         if (mProgressDialog == null) {
             mProgressDialog = (LoadingPopupView) new XPopup.Builder(activity)
                     .isLightNavigationBar(true)
                     .isViewMode(true)
-//                            .asLoading(null, R.layout.custom_loading_popup)
-                    .asLoading(msg)
+                    .asLoading(msg == null || msg.length() == 0 ? "加载中..." : msg)
                     .show();
         } else {
-            mProgressDialog.show();
+            mProgressDialog.setTitle(msg == null || msg.length() == 0 ? "加载中..." : msg);
+            if (!mProgressDialog.isShow()) {
+                mProgressDialog.show();
+            }
         }
     }
 
     /**
-     * 显示ProgressDialog
+     * 显示 ProgressDialog
      */
-    public void showProgress(Activity activity) {
-        if (activity == null || activity.isFinishing()) {
-            return;
-        }
-        //在中间弹出的Loading加载框
-        if (mProgressDialog == null) {
-            mProgressDialog = (LoadingPopupView) new XPopup.Builder(activity)
-                    .isLightNavigationBar(true)
-                    .isViewMode(true)
-                    .asLoading(null, R.layout.dialog_progress)
-                    .show();
-            ImageView loadingImageView = mProgressDialog.findViewById(R.id.loadingImageView);
-            Glide.with(activity).asGif().load(R.drawable.progress).into(loadingImageView);//icon为gif图
-            TextView tv_loadingmsg = mProgressDialog.findViewById(R.id.tv_loadingmsg);
-            tv_loadingmsg.setText("加载中...");
-        }
+    public void showProgress(FragmentActivity activity) {
+        showProgress(activity, "加载中...");
     }
 
     /**
-     * 取消ProgressDialog
+     * 取消 ProgressDialog
      */
     public void dismissProgress() {
         if (mProgressDialog != null) {
-//            LogUtils.e("自定义弹框消失 dismissProgress");
             mProgressDialog.smartDismiss();
             mProgressDialog = null;
         }

@@ -2,7 +2,6 @@ package cn.mrr.liubei.utils;
 
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
@@ -63,7 +62,7 @@ public class SystemUtil {
      * @return 手机IMEI
      */
     public static String getIMEI(Context ctx) {
-        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
         if (tm != null) {
             return tm.getDeviceId();
         }

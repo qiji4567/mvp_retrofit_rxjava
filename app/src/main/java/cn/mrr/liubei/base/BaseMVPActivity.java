@@ -1,7 +1,5 @@
 package cn.mrr.liubei.base;
 
-import javax.inject.Inject;
-
 import android.content.Intent;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -15,29 +13,23 @@ import cn.mvp.network.utils.LogUtils;
 public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActivity implements BaseView {
 
 
-    @Inject
     protected T mPresenter;
 
-    //    private LoadingDialog loadingDialog;
-    private long clickTime = 0;
 
-    public void initInject() {
-    }
 
-    public boolean onViewClick() {
-        if (System.currentTimeMillis() - 1000 < clickTime) {
-            showMsg("请不要频繁点击");
-            return true;
-        }
-        clickTime = System.currentTimeMillis();
-        return false;
-    }
+    /**
+     * 创建Presenter
+     *
+     * @return presenter
+     */
+    protected abstract T createPresenter();
+
 
 
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
-        initInject();
+        mPresenter = createPresenter();
         if (null != mPresenter) {
             mPresenter.attachView(this);
         }
@@ -54,7 +46,6 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
     @Override
     public void showMsg(CharSequence msg) {
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-//        SnackBarUtils.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), msg);
     }
 
     public void showContent(CharSequence msg) {
@@ -66,7 +57,6 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
     @Override
     public void showError(CharSequence error) {
         Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
-//        SnackBarUtils.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), error);
     }
 
     @Override

@@ -3,7 +3,7 @@ package cn.mvp.network.net.common;
 import java.lang.ref.WeakReference;
 
 
-import android.app.Activity;
+import androidx.fragment.app.FragmentActivity;
 
 import androidx.annotation.NonNull;
 
@@ -19,8 +19,8 @@ import io.reactivex.functions.Consumer;
 
 public class ProgressUtils {
     public static <T> ObservableTransformer<T, T> applyProgressBar(
-            @NonNull final Activity activity, String msg) {
-        final WeakReference<Activity> activityWeakReference = new WeakReference<>(activity);
+            @NonNull final FragmentActivity activity, String msg) {
+        final WeakReference<FragmentActivity> activityWeakReference = new WeakReference<>(activity);
         final LoadingDialog dialogUtils = LoadingDialog.getLoadingDialog();
         if (!activityWeakReference.get().isFinishing()) {
             LogUtils.d("请求进度的上下文 " + activity.getClass().getSimpleName());
@@ -29,13 +29,13 @@ public class ProgressUtils {
         return upstream -> upstream.doOnSubscribe(disposable -> {
 
         }).doOnTerminate(() -> {
-            Activity context;
+            FragmentActivity context;
             if ((context = activityWeakReference.get()) != null
                     && !context.isFinishing()) {
                 dialogUtils.dismissProgress();
             }
         }).doOnSubscribe((Consumer<Disposable>) disposable -> {
-//            Activity context;
+//            FragmentActivity context;
 //            if ((context = activityWeakReference.get()) != null
 //                    && !context.isFinishing()) {
 //                dialogUtils.dismissProgress();
@@ -44,7 +44,7 @@ public class ProgressUtils {
     }
 
     public static <T> ObservableTransformer<T, T> applyProgressBar(
-            @NonNull final Activity activity) {
+            @NonNull final FragmentActivity activity) {
         return applyProgressBar(activity, "");
     }
 }

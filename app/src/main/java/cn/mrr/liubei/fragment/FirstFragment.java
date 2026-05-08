@@ -1,13 +1,13 @@
 package cn.mrr.liubei.fragment;
 
-import android.view.View;
-import android.widget.TextView;
-
 import cn.mrr.liubei.R;
 import cn.mrr.liubei.activity.ImageViewActivity;
 import cn.mrr.liubei.base.BaseMVPFragment;
+import cn.mrr.liubei.databinding.Layout1Binding;
 
 public class FirstFragment extends BaseMVPFragment {
+    private Layout1Binding binding;
+
     @Override
     protected int getLayoutId() {
         return R.layout.layout1;
@@ -15,14 +15,7 @@ public class FirstFragment extends BaseMVPFragment {
 
     @Override
     protected void initialize() {
-        TextView textView = mView.findViewById(R.id.text);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(mActivity, ImageViewActivity.class, false);
-            }
-        });
+        binding = Layout1Binding.bind(mView);
+        binding.text.setOnClickListener(v -> startActivity(mActivity, ImageViewActivity.class, false));
     }
-
-
 }

@@ -1,32 +1,28 @@
 package cn.mrr.liubei.activity;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.jaeger.library.StatusBarUtil;
+import java.util.ArrayList;
+import java.util.Random;
 
 import cn.mrr.liubei.R;
-import cn.mrr.liubei.base.BaseMVPActivity;
+import cn.mrr.liubei.base.BaseActivity;
+import cn.mrr.liubei.databinding.ActivityUseInFragmentBinding;
 import cn.mrr.liubei.fragment.FirstFragment;
 import cn.mrr.liubei.fragment.SecondFragment;
 import cn.mrr.liubei.fragment.ThirdFragment;
+import cn.mrr.liubei.utils.StatusBarUtil;
 
 /**
- * Created by Jaeger on 16/8/11.
- *
- * Email: chjie.jaeger@gmail.com
- * GitHub: https://github.com/laobie
+ * @author 53443
  */
-public class UseInFragmentActivity extends BaseMVPActivity {
-    private ViewPager mVpHome;
-    private BottomNavigationBar mBottomNavigationBar;
-    private ArrayList<Fragment> mFragmentList = new ArrayList<>();
+public class UseInFragmentActivity extends BaseActivity {
+
+    private ActivityUseInFragmentBinding binding;
+    private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -35,64 +31,27 @@ public class UseInFragmentActivity extends BaseMVPActivity {
 
     @Override
     protected void initialize() {
-        mVpHome = (ViewPager) findViewById(R.id.vp_home);
-        mBottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_favorite, "One"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_gavel, "Two"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_grade, "Three"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_group_work, "Four"))
-                .initialise();
+        binding = ActivityUseInFragmentBinding.bind(getContentView());
 
-        mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position) {
-                mVpHome.setCurrentItem(position);
-            }
+        initFragments();
+        initViewPager();
+        initBottomNavigation();
+    }
 
-            @Override
-            public void onTabUnselected(int position) {
-
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-
-            }
-        });
-
+    private void initFragments() {
+        mFragmentList.clear();
         mFragmentList.add(new FirstFragment());
         mFragmentList.add(new SecondFragment());
         mFragmentList.add(new ThirdFragment());
         mFragmentList.add(new ThirdFragment());
+    }
 
-        mVpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mBottomNavigationBar.selectTab(position);
-                switch (position) {
-                    case 0:
-                        break;
-                    default:
-                        Random random = new Random();
-                        int color = 0xff000000 | random.nextInt(0xffffff);
-                        if (mFragmentList.get(position) instanceof ThirdFragment) {
-                            ((ThirdFragment) mFragmentList.get(position)).setTvTitleBackgroundColor(color);
-                        }
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        mVpHome.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+    private void initViewPager() {
+        binding.vpHome.setAdapter(new FragmentPagerAdapter(
+                getSupportFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+        ) {
+            @NonNull
             @Override
             public Fragment getItem(int position) {
                 return mFragmentList.get(position);
@@ -103,12 +62,68 @@ public class UseInFragmentActivity extends BaseMVPActivity {
                 return mFragmentList.size();
             }
         });
+
+        binding.vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                selectBottomNavigation(position);
+
+                if (position != 0 && mFragmentList.get(position) instanceof ThirdFragment) {
+                    int color = 0xff000000 | new Random().nextInt(0xffffff);
+                    ((ThirdFragment) mFragmentList.get(position)).setTvTitleBackgroundColor(color);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
+    private void initBottomNavigation() {
+        binding.bottomNavigationBar.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
 
+            if (itemId == R.id.nav_one) {
+                binding.vpHome.setCurrentItem(0, false);
+                return true;
+            } else if (itemId == R.id.nav_two) {
+                binding.vpHome.setCurrentItem(1, false);
+                return true;
+            } else if (itemId == R.id.nav_three) {
+                binding.vpHome.setCurrentItem(2, false);
+                return true;
+            } else if (itemId == R.id.nav_four) {
+                binding.vpHome.setCurrentItem(3, false);
+                return true;
+            }
+
+            return false;
+        });
+
+        binding.bottomNavigationBar.setSelectedItemId(R.id.nav_one);
+    }
+
+    private void selectBottomNavigation(int position) {
+        if (position == 0) {
+            binding.bottomNavigationBar.setSelectedItemId(R.id.nav_one);
+        } else if (position == 1) {
+            binding.bottomNavigationBar.setSelectedItemId(R.id.nav_two);
+        } else if (position == 2) {
+            binding.bottomNavigationBar.setSelectedItemId(R.id.nav_three);
+        } else if (position == 3) {
+            binding.bottomNavigationBar.setSelectedItemId(R.id.nav_four);
+        }
+    }
 
     @Override
     protected void setStatusBar() {
         StatusBarUtil.setTranslucentForImageViewInFragment(UseInFragmentActivity.this, null);
     }
+
+
 }

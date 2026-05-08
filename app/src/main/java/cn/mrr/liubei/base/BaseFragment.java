@@ -1,6 +1,5 @@
 package cn.mrr.liubei.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,54 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import me.yokeyword.fragmentation.SupportFragment;
-
-public abstract class BaseFragment extends SupportFragment {
-
-
+public abstract class BaseFragment extends Fragment {
     protected View mView;
-
-    protected Activity mActivity;
-
+    protected AppCompatActivity mActivity;
     protected Context mContext;
-
-    private Unbinder mUnBinder;
-
-    protected abstract int getLayoutId();
-
-    protected abstract void initialize();
-
     protected boolean isInited = false;
 
-    @Override
-    public void onAttach(Context context) {
-        mActivity = (Activity) context;
-        mContext = context;
-        super.onAttach(context);
-    }
+    protected abstract int getLayoutId();
+    protected abstract void initialize();
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(getLayoutId(), null);
-        mUnBinder = ButterKnife.bind(this, mView);
-        return mView;
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
-        isInited = true;
-        initialize();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mUnBinder.unbind();
-    }
-
+    @Override public void onAttach(Context context) { super.onAttach(context); mActivity = (AppCompatActivity) context; mContext = context; }
+    @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) { mView = inflater.inflate(getLayoutId(), container, false); return mView; }
+    @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) { super.onViewCreated(view, savedInstanceState); if (!isInited) { isInited = true; initialize(); } }
+    @Override public void onDestroyView() { super.onDestroyView(); mView = null; }
 }

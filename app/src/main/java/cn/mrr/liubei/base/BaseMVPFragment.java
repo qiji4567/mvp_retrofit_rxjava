@@ -54,13 +54,11 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     @Override
     public void showMsg(CharSequence msg) {
         Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
-//        SnackBarUtils.show(((ViewGroup) mActivity.findViewById(android.R.id.content)).getChildAt(0), msg);
     }
 
     @Override
     public void showError(CharSequence error) {
         Toast.makeText(mContext, error, Toast.LENGTH_LONG).show();
-//        SnackBarUtils.show(((ViewGroup) findViewById(android.R.id.content)).getChildAt(0), error);
     }
 
     @Override
@@ -110,7 +108,7 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     }
 
 
-    public void startActivity(android.app.Activity from, Class<?> to, boolean isFinish) {
+    public void startActivity(androidx.appcompat.app.AppCompatActivity from, Class<?> to, boolean isFinish) {
         Intent intent = new Intent();
         intent.setClass(from, to);
         startActivity(intent);
@@ -120,7 +118,7 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     }
 
     // 带参数的Activity
-    protected void startActivity(android.app.Activity from, Class<?> to, Bundle bundle, boolean isFinish) {
+    protected void startActivity(androidx.appcompat.app.AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
         Intent intent = new Intent();
         if (bundle != null)
             intent.putExtras(bundle);

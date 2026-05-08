@@ -2,7 +2,7 @@ package cn.mrr.liubei.manager;
 
 import java.util.Stack;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import cn.mvp.network.utils.LogUtils;
 
@@ -12,7 +12,7 @@ import cn.mvp.network.utils.LogUtils;
 
 public class AppActivityTaskManager {
     //存储ActivityStack
-    private static Stack<Activity> activityStack = new Stack<>();
+    private static Stack<AppCompatActivity> activityStack = new Stack<>();
 
     //单例模式
     private static AppActivityTaskManager instance;
@@ -38,7 +38,7 @@ public class AppActivityTaskManager {
      *
      * @param activity
      */
-    public void addActivity(Activity activity) {
+    public void addActivity(AppCompatActivity activity) {
         LogUtils.i("AppActivityTaskManager-->>addActivity", activity != null ? activity.toString() : "");
         if (null == activityStack) {
             activityStack = new Stack<>();
@@ -51,7 +51,7 @@ public class AppActivityTaskManager {
      *
      * @param activity
      */
-    public void removeActivity(Activity activity) {
+    public void removeActivity(AppCompatActivity activity) {
         LogUtils.i("AppActivityTaskManager-->>removeActivity", activity != null ? activity.toString() : "");
         if (null != activity) {
             // 为与系统Activity栈保持一致，
@@ -66,10 +66,10 @@ public class AppActivityTaskManager {
     /**
      * 获取当前Act对象
      *
-     * @return Activity 当前Act
+     * @return AppCompatActivity 当前Act
      */
-    public Activity currentActivity() {
-        Activity activity = null;
+    public AppCompatActivity currentActivity() {
+        AppCompatActivity activity = null;
         if (!activityStack.empty()) {
             activity = activityStack.lastElement();
         }
@@ -83,8 +83,8 @@ public class AppActivityTaskManager {
     public void removeAllActivity() {
         if (null != activityStack && activityStack.size() > 0) {
             //创建临时集合对象
-            Stack<Activity> activityTemp = new Stack<>();
-            for (Activity activity : activityStack) {
+            Stack<AppCompatActivity> activityTemp = new Stack<>();
+            for (AppCompatActivity activity : activityStack) {
                 if (null != activity) {
                     //添加到临时集合中
                     activityTemp.add(activity);

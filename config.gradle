@@ -69,9 +69,6 @@ ext {
             // 弹框库
             "XPopup"                     : "com.github.li-xiaojun:XPopup:2.10.0",
 
-            // base 用的 fragmentation 和 activity
-            "fragmentationx"             : "me.yokeyword:fragmentationx:1.0.2",
-            "fragmentation-swipeback"    : "me.yokeyword:fragmentation-swipeback:1.3.0",
 
             // dagger2
             "dagger"                     : "com.google.dagger:dagger:2.48",

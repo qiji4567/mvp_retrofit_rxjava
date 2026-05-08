@@ -1,6 +1,6 @@
 package cn.mrr.liubei.module;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 import cn.mrr.liubei.di.qualifier.WeatherURL;
@@ -21,15 +21,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class BaseActivityModule {
 
-    private Activity activity;
+    private AppCompatActivity activity;
 
-    public BaseActivityModule(Activity activity) {
+    public BaseActivityModule(AppCompatActivity activity) {
         this.activity = activity;
     }
 
     @Provides
     @ActivityScope
-    Activity provideActivity() {
+    AppCompatActivity provideActivity() {
         return activity;
     }
 
