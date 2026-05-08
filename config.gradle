@@ -1,80 +1,80 @@
 ext {
-    //基础版本
+    // 基础版本
     android = [
             applicationId    : "cn.mrr.liubei",
-            compileSdkVersion: 31,
+            compileSdkVersion: 35,
             minSdkVersion    : 26,
-            targetSdkVersion : 31,
+            targetSdkVersion : 35,
             versionCode      : 5,
             versionName      : "1.0.5"
     ]
-    //三方版本
+
+    // 三方版本
     version = [
-            androidxSdkVersion        : "1.1.0",
-            constraintlayoutSdkVersion: "1.1.3",
-            recyclerview              : "1.2.1",
+            androidxSdkVersion        : "1.7.0",
+            materialSdkVersion        : "1.12.0",
+            constraintlayoutSdkVersion: "2.1.4",
+            recyclerview              : "1.3.2",
     ]
 
-    //开发环境的搭建
+    // 开发环境的搭建
     buildType = [
-            develop: "https://gateway-uat.bestgenetics.com.cn/",
+            develop  : "https://gateway-uat.bestgenetics.com.cn/",
 
             test     : "http://oa-test.hi-cloud.net/admin/",
             testWeb  : "https://oa2mall.harpbj.com/",
 
             onlineWeb: "https://oa2mall.harpbj.com/",
             online   : "https://oa2.harpbj.com/admin/",
-
     ]
 
-    //集成依赖的库
+    // 集成依赖的库
     dependencies = [
-            //androidx
+            // androidx
             "appcompat"                  : "androidx.appcompat:appcompat:${version["androidxSdkVersion"]}",
-            "material"                   : "com.google.android.material:material:${version["androidxSdkVersion"]}",
+            "material"                   : "com.google.android.material:material:${version["materialSdkVersion"]}",
             "constraintlayout"           : "androidx.constraintlayout:constraintlayout:${version["constraintlayoutSdkVersion"]}",
             "recyclerview"               : "androidx.recyclerview:recyclerview:${version["recyclerview"]}",
-            "recyclerview-selection"     : "androidx.recyclerview:recyclerview-selection:${version["androidxSdkVersion"]}",
+            "recyclerview-selection"     : "androidx.recyclerview:recyclerview-selection:1.1.0",
 
-            // network网络请求依赖
-            "rxjava2:rxjava"             : "io.reactivex.rxjava2:rxjava:2.2.10",
-            "rxlifecycle"                : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.1",
+            // network 网络请求依赖
+            "rxjava2:rxjava"             : "io.reactivex.rxjava2:rxjava:2.2.21",
+            "rxlifecycle"                : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
             "rxjava2:rxandroid"          : "io.reactivex.rxjava2:rxandroid:2.1.1",
-            "retrofit"                   : "com.squareup.retrofit2:retrofit:2.6.1",
-            "retrofit2:adapter-rxjava"   : "com.squareup.retrofit2:adapter-rxjava2:2.5.0",
-            "retrofit2:converter-gson"   : "com.squareup.retrofit2:converter-gson:2.6.1",
-            "okhttp3:logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.9.0",
-            "gson"                       : "com.google.code.gson:gson:2.9.0",
+            "retrofit"                   : "com.squareup.retrofit2:retrofit:2.9.0",
+            "retrofit2:adapter-rxjava"   : "com.squareup.retrofit2:adapter-rxjava2:2.9.0",
+            "retrofit2:converter-gson"   : "com.squareup.retrofit2:converter-gson:2.9.0",
+            "okhttp3:logging-interceptor": "com.squareup.okhttp3:logging-interceptor:4.12.0",
+            "gson"                       : "com.google.code.gson:gson:2.10.1",
 
-//            //test
+            // test
             "androidJUnitRunner"         : "androidx.test.runner.AndroidJUnitRunner",
 
-//            "butterknife"                : 'com.jakewharton:butterknife:10.2.3',
-//            "butterknife-compiler"       : 'com.jakewharton:butterknife-compiler:10.2.3',
+            "hipermission:library"       : "me.weyye.hipermission:library:1.0.7",
+            "kprogresshud"               : "com.kaopiz:kprogresshud:1.1.0",
 
-            "hipermission:library"       : 'me.weyye.hipermission:library:1.0.7',
-            //动态权限申
-            "kprogresshud"               : 'com.kaopiz:kprogresshud:1.1.0',
-            //时间选择
-            "bumptech.glide:glide"       : 'com.github.bumptech.glide:glide:4.8.0',
-            //申请动态权限
-            "lovedise:permissiongen"     : 'com.lovedise:permissiongen:0.0.6',
-            //文件下载
-            "filedownloader"             : 'com.liulishuo.filedownloader:library:1.7.5',
-            //base64加密
-            "commons-codec"              : 'commons-codec:commons-codec:1.14',
-            //弹框库
-            "XPopup"                     : 'com.github.li-xiaojun:XPopup:2.6.8',
-            //图片加载
-            "glide:glide"                : 'com.github.bumptech.glide:glide:4.13.0',
-            "glide:compiler"             : 'com.github.bumptech.glide:compiler:4.13.0',
-            // base用的 fragmentation和activity
-            "fragmentationx"             : 'me.yokeyword:fragmentationx:1.0.2',
-            "fragmentation-swipeback"    : 'me.yokeyword:fragmentation-swipeback:1.3.0',
+            // 图片加载
+            "glide:glide"                : "com.github.bumptech.glide:glide:4.16.0",
+            "glide:compiler"             : "com.github.bumptech.glide:compiler:4.16.0",
+
+            // 申请动态权限
+            "lovedise:permissiongen"     : "com.lovedise:permissiongen:0.0.6",
+
+            // 文件下载
+            "filedownloader"             : "com.liulishuo.filedownloader:library:1.7.7",
+
+            // base64 加密
+            "commons-codec"              : "commons-codec:commons-codec:1.16.0",
+
+            // 弹框库
+            "XPopup"                     : "com.github.li-xiaojun:XPopup:2.10.0",
+
+            // base 用的 fragmentation 和 activity
+            "fragmentationx"             : "me.yokeyword:fragmentationx:1.0.2",
+            "fragmentation-swipeback"    : "me.yokeyword:fragmentation-swipeback:1.3.0",
 
             // dagger2
-            "dagger"                     : 'com.google.dagger:dagger:2.25.4',
-            "dagger-compiler"            : 'com.google.dagger:dagger-compiler:2.25.4'
-
+            "dagger"                     : "com.google.dagger:dagger:2.48",
+            "dagger-compiler"            : "com.google.dagger:dagger-compiler:2.48"
     ]
 }
