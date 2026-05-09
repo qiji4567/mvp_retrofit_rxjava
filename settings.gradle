@@ -19,4 +19,3 @@ dependencyResolutionManagement {
 rootProject.name = "mvp_retrofit_rxjava"
 
 include ':app'
-include ':network'

@@ -1,41 +1,36 @@
-package cn.mrr.liubei.application;
+package cn.mrr.liubei;
 
 import android.app.Application;
 
-import cn.mrr.liubei.di.component.AppComponent;
-import cn.mrr.liubei.di.component.DaggerAppComponent;
-import cn.mrr.liubei.module.ApplicationModule;
-import cn.mrr.liubei.module.HttpModule;
-import cn.mvp.network.utils.ApplicationContextUtils;
+import cn.mrr.liubei.net.ApiClient;
 
-
-/**
- * =================================================
- *
- * @author qi ji
- * @date 2021/8/23 11:28
- * @Email: 534438777@qq.com
- * @Content: =================================================
- */
 public class MyApplication extends Application {
 
+    private static MyApplication instance;
 
-    public static AppComponent appComponent;
+    /**
+     * 默认 BaseUrl。
+     * 注意：Retrofit 的 baseUrl 必须以 / 结尾。
+     */
+    private static final String DEFAULT_BASE_URL = "https://gateway-uat.bestgenetics.com.cn/";
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ApplicationContextUtils.init(this);
-        appComponent = DaggerAppComponent
-                .builder()
-                .applicationModule(new ApplicationModule(this))
-                .httpModule(new HttpModule())
-                .build();
+        instance = this;
+
+        ApiClient.init(DEFAULT_BASE_URL);
     }
 
-    public static AppComponent getAppComponent() {
-        return appComponent;
+    public static MyApplication getInstance() {
+        return instance;
+    }
+
+    public static void setBaseUrl(String baseUrl) {
+        ApiClient.setBaseUrl(baseUrl);
+    }
+
+    public static String getBaseUrl() {
+        return ApiClient.getBaseUrl();
     }
 }
- 
- 

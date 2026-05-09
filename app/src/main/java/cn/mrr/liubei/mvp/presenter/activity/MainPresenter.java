@@ -1,26 +1,18 @@
 package cn.mrr.liubei.mvp.presenter.activity;
 
-import javax.inject.Inject;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import javax.inject.Inject;
 
 import cn.mrr.liubei.base.BaseObserver;
-import cn.mrr.liubei.base.BaseSubscriber;
 import cn.mrr.liubei.base.RxPresenter;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.mvp.MobileCountModel;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
-import cn.mrr.liubei.net.IdeaApiService;
-import cn.mrr.liubei.net.RetrofitHelper;
-import cn.mvp.network.net.common.ResponseObserver;
 import cn.mvp.network.net.module.BaseBean;
-import cn.mvp.network.utils.RxUtil;
-import cn.mvp.network.utils.SPUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 

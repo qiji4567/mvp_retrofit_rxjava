@@ -11,7 +11,6 @@ import cn.mrr.liubei.base.RxPresenter;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.mvp.MobileCountModel;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
-import cn.mrr.liubei.net.IdeaApiService;
 import cn.mvp.network.net.module.BaseBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
