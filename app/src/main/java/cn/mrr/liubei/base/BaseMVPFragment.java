@@ -1,31 +1,28 @@
 package cn.mrr.liubei.base;
 
-import javax.inject.Inject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import cn.mrr.liubei.activity.ExitActivity;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.base.interfaces.BaseView;
-import cn.mvp.network.dialog.LoadingDialog;
+import cn.mrr.liubei.dialog.LoadingDialog;
 
-
+/**
+ * @author 53443
+ */
 public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragment implements BaseView {
 
-
-    @Inject
     protected T mPresenter;
 
-//    private LoadingDialog loadingDialog;
-    private long clickTime = 0;
+    protected abstract T createPresenter();
 
-    public void initInject() {
-    }
+    private long clickTime = 0;
 
     public boolean onViewClick() {
         if (System.currentTimeMillis() - 1000 < clickTime) {
@@ -39,16 +36,18 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initInject();
-        if (mPresenter != null)
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
             mPresenter.attachView(this);
+        }
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.detachView();
+        }
+        super.onDestroyView();
     }
 
     @Override
@@ -73,42 +72,23 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
 
     @Override
     public void showEmptyView() {
-
     }
 
     @Override
     public void showErrorView() {
-
     }
 
     @Override
     public void startLoading() {
-//        if (null == loadingDialog) {
-//            loadingDialog = new LoadingDialog(mActivity);
-//        }
-//        if (!loadingDialog.isShowing()) {
-//            loadingDialog.show();
-//        }
-        LoadingDialog.getLoadingDialog().showProgress(mActivity);
+        LoadingDialog.getInstance().showProgress(mActivity);
     }
 
     @Override
     public void stopLoading() {
-//        LogUtils.e("销毁弹框名字 =  ", this.getClass().getSimpleName());
-//        if (null != loadingDialog && loadingDialog.isShowing()) {
-//            loadingDialog.dismiss();
-//            loadingDialog = null;
-//        }
-        LoadingDialog.getLoadingDialog().dismissProgress();
+        LoadingDialog.getInstance().dismissProgress();
     }
 
-    public void showToast(String content) {
-        Toast.makeText(mActivity, content, Toast.LENGTH_SHORT).show();
-
-    }
-
-
-    public void startActivity(androidx.appcompat.app.AppCompatActivity from, Class<?> to, boolean isFinish) {
+    public void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
         Intent intent = new Intent();
         intent.setClass(from, to);
         startActivity(intent);
@@ -117,11 +97,11 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
         }
     }
 
-    // 带参数的Activity
-    protected void startActivity(androidx.appcompat.app.AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
+    protected void startActivity(AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
         Intent intent = new Intent();
-        if (bundle != null)
+        if (bundle != null) {
             intent.putExtras(bundle);
+        }
         intent.setClass(from, to);
         startActivity(intent);
         if (isFinish) {

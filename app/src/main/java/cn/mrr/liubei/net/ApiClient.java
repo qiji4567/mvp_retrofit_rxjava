@@ -10,10 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class ApiClient {
 
-    private static final int CONNECT_TIMEOUT_SECONDS = 15;
-    private static final int READ_TIMEOUT_SECONDS = 20;
-    private static final int WRITE_TIMEOUT_SECONDS = 20;
-
     private static volatile String baseUrl;
     private static volatile Retrofit retrofit;
     private static volatile ApiService apiService;
@@ -34,7 +30,15 @@ public final class ApiClient {
 
         baseUrl = finalUrl;
 
-        OkHttpClient okHttpClient = createOkHttpClient();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor)
+                .build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -46,35 +50,15 @@ public final class ApiClient {
         apiService = retrofit.create(ApiService.class);
     }
 
-    public static String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public static ApiService api() {
+    public static ApiService getApiService() {
         if (apiService == null) {
-            throw new IllegalStateException("ApiClient 尚未初始化，请先在 MyApplication.onCreate() 中调用 ApiClient.init(baseUrl)");
+            throw new IllegalStateException("ApiClient 未初始化，请先在 MyApplication.onCreate() 调用 ApiClient.init(baseUrl)");
         }
         return apiService;
     }
 
-    public static Retrofit retrofit() {
-        if (retrofit == null) {
-            throw new IllegalStateException("ApiClient 尚未初始化，请先在 MyApplication.onCreate() 中调用 ApiClient.init(baseUrl)");
-        }
-        return retrofit;
-    }
-
-    private static OkHttpClient createOkHttpClient() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        return new OkHttpClient.Builder()
-                .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .writeTimeout(WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-                .addInterceptor(new HeaderInterceptor())
-                .addInterceptor(loggingInterceptor)
-                .build();
+    public static String getBaseUrl() {
+        return baseUrl;
     }
 
     private static String normalizeBaseUrl(String url) {
@@ -85,7 +69,7 @@ public final class ApiClient {
         String result = url.trim();
 
         if (!result.startsWith("http://") && !result.startsWith("https://")) {
-            throw new IllegalArgumentException("BaseUrl 必须以 http:// 或 https:// 开头：" + result);
+            throw new IllegalArgumentException("BaseUrl 必须以 http:// 或 https:// 开头");
         }
 
         if (!result.endsWith("/")) {

@@ -25,28 +25,40 @@ android {
     }
 
     buildTypes {
-        debug { signingConfig signingConfigs.config; minifyEnabled false; shrinkResources false;
-            debuggable true }
-        release { signingConfig signingConfigs.config; minifyEnabled false; shrinkResources false;
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' }
-        online { initWith release; matchingFallbacks = ['release'];
+        debug {
+            signingConfig signingConfigs.config; minifyEnabled false; shrinkResources false;
+            debuggable true
+        }
+        release {
+            signingConfig signingConfigs.config; minifyEnabled false; shrinkResources false;
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        online {
+            initWith release; matchingFallbacks = ['release'];
             signingConfig signingConfigs.config; minifyEnabled true; zipAlignEnabled true;
             shrinkResources true;
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' }
-        textapp { initWith debug; matchingFallbacks = ['debug'];
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        textapp {
+            initWith debug; matchingFallbacks = ['debug'];
             signingConfig signingConfigs.config; minifyEnabled false; zipAlignEnabled false;
             shrinkResources false; debuggable true;
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' }
-        develop { initWith debug; matchingFallbacks = ['debug'];
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        develop {
+            initWith debug; matchingFallbacks = ['debug'];
             signingConfig signingConfigs.config; minifyEnabled false; zipAlignEnabled false;
             shrinkResources false; debuggable true;
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' }
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 
     buildFeatures { viewBinding true }
 
-    compileOptions { sourceCompatibility JavaVersion.VERSION_17;
-        targetCompatibility JavaVersion.VERSION_17 }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17;
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     applicationVariants.configureEach { variant ->
         variant.outputs.configureEach { outputFileName = "pda-${variant.name}-V${variant.versionName}.apk" }

@@ -3,7 +3,7 @@ package cn.mrr.liubei.base;
 import android.content.Context;
 
 import cn.mrr.liubei.base.interfaces.BaseView;
-import cn.mvp.network.utils.NetworkUtils;
+import cn.mrr.liubei.utils.NetworkUtils;
 import io.reactivex.observers.DisposableObserver;
 
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
@@ -50,10 +50,12 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
         onError();
     }
 
-    public void onError() {}
+    public void onError() {
+    }
 
 
     @Override
-    public void onComplete() {}
+    public void onComplete() {
+    }
 
 }

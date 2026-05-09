@@ -5,34 +5,26 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import javax.inject.Inject;
-
 import cn.mrr.liubei.base.BaseObserver;
 import cn.mrr.liubei.base.RxPresenter;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.mvp.MobileCountModel;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
-import cn.mvp.network.net.module.BaseBean;
+import cn.mrr.liubei.net.ApiClient;
+import cn.mrr.liubei.net.ApiService;
+import cn.mrr.liubei.net.BaseBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * 功能描述
- *
- * @author qiji
- * @Description
- * @since 2022-08-23
- */
-public class MainPresenter extends RxPresenter<BaseContractView<MobileCountModel>> implements BasePresenter<BaseContractView<MobileCountModel>>{
+public class MainPresenter extends RxPresenter<BaseContractView<MobileCountModel>>
+        implements BasePresenter<BaseContractView<MobileCountModel>> {
 
+    private final ApiService mAppApi;
+    private final Context mContext;
 
-    private IdeaApiService mAppApi;
-    private Context mContext;
-
-    @Inject
-    public MainPresenter(IdeaApiService mAppApi, Context mContext) {
-        this.mAppApi = mAppApi;
-        this.mContext = mContext;
+    public MainPresenter(Context context) {
+        this.mAppApi = ApiClient.getApiService();
+        this.mContext = context.getApplicationContext();
     }
 
     public void login(AppCompatActivity activity, @Nullable String username, @Nullable String password) {
@@ -43,10 +35,10 @@ public class MainPresenter extends RxPresenter<BaseContractView<MobileCountModel
                     @Override
                     public void onNext(BaseBean<MobileCountModel> bean) {
                         super.onNext(bean);
-                        if (200 == bean.getCode()) {
+                        if (bean != null && bean.getCode() == 200) {
                             mView.updateUi(bean.getData(), 0);
                         } else {
-                            mView.showError(bean.getMsg());
+                            mView.showError(bean == null ? "服务器返回为空" : bean.getMsg());
                         }
                     }
 
@@ -56,24 +48,5 @@ public class MainPresenter extends RxPresenter<BaseContractView<MobileCountModel
                         mView.showError("网络处理异常");
                     }
                 }));
-
-//        RetrofitHelper.getApiService()
-//                .loginObservable(username, password)
-//                .compose(RxUtil.rxSchedulerHelper(activity, true))
-//                .subscribe(new ResponseObserver<BaseBean>() {
-//                    @Override
-//                    public void onSuccess(BaseBean response) {
-//                        //                        保存数据
-//                        SPUtils.saveObject(mContext, response);
-//                        mView.updateUi(response.getData(), 100);
-//                    }
-//
-//                    @Override
-//                    public void onFail(String message) {
-//                        super.onFail(message);
-//                        mView.showError(message);
-//                    }
-//                });
     }
-
 }

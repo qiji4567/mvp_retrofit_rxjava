@@ -7,37 +7,26 @@ import android.widget.Toast;
 import cn.mrr.liubei.activity.ExitActivity;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.base.interfaces.BaseView;
-import cn.mvp.network.dialog.LoadingDialog;
-import cn.mvp.network.utils.LogUtils;
+import cn.mrr.liubei.dialog.LoadingDialog;
 
 public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActivity implements BaseView {
 
-
     protected T mPresenter;
 
-
-
-    /**
-     * 创建Presenter
-     *
-     * @return presenter
-     */
     protected abstract T createPresenter();
-
-
 
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
         mPresenter = createPresenter();
-        if (null != mPresenter) {
+        if (mPresenter != null) {
             mPresenter.attachView(this);
         }
     }
 
     @Override
     protected void onDestroy() {
-        if (null != mPresenter) {
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
         super.onDestroy();
@@ -69,7 +58,6 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     public void showEmptyView() {
     }
@@ -80,22 +68,11 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
 
     @Override
     public synchronized void startLoading() {
-//        if (null == loadingDialog) {
-//            loadingDialog = new LoadingDialog(mContext);
-//        }
-//        if (!loadingDialog.isShowing()) {
-//            loadingDialog.show();
-//        }
-        LoadingDialog.getLoadingDialog().showProgress(mContext);
+        LoadingDialog.getInstance().showProgress(this);
     }
 
     @Override
     public synchronized void stopLoading() {
-        LogUtils.e("销毁弹框名字 =  ", this.getClass().getSimpleName());
-//        if (null != loadingDialog && loadingDialog.isShowing()) {
-//            loadingDialog.dismiss();
-//            loadingDialog = null;
-//        }
-        LoadingDialog.getLoadingDialog().dismissProgress();
+        LoadingDialog.getInstance().dismissProgress();
     }
 }

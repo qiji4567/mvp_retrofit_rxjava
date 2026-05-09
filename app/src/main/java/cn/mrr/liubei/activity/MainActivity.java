@@ -13,7 +13,7 @@ public class MainActivity extends BaseMVPActivity<MainPresenter> implements Base
 
     @Override
     protected MainPresenter createPresenter() {
-        return new MainPresenter(RetrofitHelper.getApiService(), this);
+        return new MainPresenter( this);
     }
 
     @Override

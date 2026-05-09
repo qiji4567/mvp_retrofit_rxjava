@@ -1,4 +1,4 @@
-package cn.mrr.liubei;
+package cn.mrr.liubei.application;
 
 import android.app.Application;
 
@@ -8,17 +8,12 @@ public class MyApplication extends Application {
 
     private static MyApplication instance;
 
-    /**
-     * 默认 BaseUrl。
-     * 注意：Retrofit 的 baseUrl 必须以 / 结尾。
-     */
     private static final String DEFAULT_BASE_URL = "https://gateway-uat.bestgenetics.com.cn/";
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-
         ApiClient.init(DEFAULT_BASE_URL);
     }
 

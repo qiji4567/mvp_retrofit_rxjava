@@ -18,14 +18,11 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     public Gson gson;
 
     @Inject
-    public RxPresenter(){
-        if (null == gson){
+    public RxPresenter() {
+        if (null == gson) {
             gson = new Gson();
         }
     }
-
-
-
 
     /**
      * 订阅事件
@@ -49,7 +46,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
     }
 
 
-
     @Override
     public void attachView(T view) {
         this.mView = view;
@@ -60,7 +56,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
         this.mView = null;
         unSubscribe();
     }
-
 
 
 }

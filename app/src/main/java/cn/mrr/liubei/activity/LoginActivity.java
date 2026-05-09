@@ -7,15 +7,15 @@ import cn.mrr.liubei.base.BaseMVPActivity;
 import cn.mrr.liubei.databinding.ActivityLoginBinding;
 import cn.mrr.liubei.mvp.presenter.activity.LoginPresenter;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
+import cn.mrr.liubei.utils.LogUtils;
 import cn.mrr.liubei.utils.SystemUtil;
-import cn.mvp.network.utils.LogUtils;
 
 public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements BaseContractView<Object> {
     private ActivityLoginBinding binding;
 
     @Override
     protected LoginPresenter createPresenter() {
-        return new LoginPresenter(RetrofitHelper.getApiService(), this);
+        return new LoginPresenter(this);
     }
 
     @Override protected int getLayoutId() { return R.layout.activity_login; }

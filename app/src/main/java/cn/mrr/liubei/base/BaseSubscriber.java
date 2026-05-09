@@ -4,7 +4,7 @@ import android.content.Context;
 
 
 import cn.mrr.liubei.base.interfaces.BaseView;
-import cn.mvp.network.utils.NetworkUtils;
+import cn.mrr.liubei.utils.NetworkUtils;
 import io.reactivex.subscribers.ResourceSubscriber;
 
 public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
