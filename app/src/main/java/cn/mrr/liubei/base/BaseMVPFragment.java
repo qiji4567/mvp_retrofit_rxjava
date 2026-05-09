@@ -88,24 +88,5 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
         LoadingDialog.getInstance().dismissProgress();
     }
 
-    public void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
-        Intent intent = new Intent();
-        intent.setClass(from, to);
-        startActivity(intent);
-        if (isFinish) {
-            from.finish();
-        }
-    }
 
-    protected void startActivity(AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
-        Intent intent = new Intent();
-        if (bundle != null) {
-            intent.putExtras(bundle);
-        }
-        intent.setClass(from, to);
-        startActivity(intent);
-        if (isFinish) {
-            from.finish();
-        }
-    }
 }
