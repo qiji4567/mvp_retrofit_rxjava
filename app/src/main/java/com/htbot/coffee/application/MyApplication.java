@@ -23,6 +23,7 @@ import com.htbot.coffee.utils.request.NetworkDialogManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 /**
@@ -90,7 +91,7 @@ public class MyApplication extends Application {
                 HashMap<String, Object> postMap = new HashMap<>();
                 postMap.put("serialNumber", MyApplication.instance.serialNumber);
                 LogUtils.d("打印appliction：", GsonUtils.toJson(postMap));
-                RequestBody body = RequestBody.create(HttpClient.mediaType, AESUtils.createRequestBody(postMap));
+                RequestBody body = RequestBody.create(AESUtils.createRequestBody(postMap), MediaType.parse("application/json; charset=utf-8"));
                 WebSocketManager.INSTANCE.addInitDispose(BusinessApi.getDeviceDetail(body)
                         .doOnError(error -> {
                             MyApplication.instance.queryDeviceFailed = true;
