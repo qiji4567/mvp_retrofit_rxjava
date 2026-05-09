@@ -103,10 +103,9 @@ public final class GsonUtils {
         return GSON.fromJson(json, type);
     }
 
+    /* ===================== BaseBeanNew<T> ===================== */
 
 
-
-    /* ===================== 判空辅助 ===================== */
 
 
     public static boolean isEmpty(List<?> list) {

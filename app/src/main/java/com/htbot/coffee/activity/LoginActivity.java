@@ -3,7 +3,7 @@ package com.htbot.coffee.activity;
 import android.view.View;
 
 import com.htbot.coffee.R;
-import com.htbot.coffee.base.BaseMVPActivity;
+import com.htbot.coffee.base.BaseMvpActivity;
 import com.htbot.coffee.databinding.ActivityLoginBinding;
 import com.htbot.coffee.mvp.presenter.activity.LoginPresenter;
 import com.htbot.coffee.mvp.presenter.contract.BaseContractView;
@@ -13,7 +13,7 @@ import com.htbot.coffee.utils.SystemUtil;
 /**
  * @author 53443
  */
-public class LoginActivity extends BaseMVPActivity<ActivityLoginBinding, LoginPresenter>
+public class LoginActivity extends BaseMvpActivity<ActivityLoginBinding, LoginPresenter>
         implements BaseContractView<Object> {
 
     @Override

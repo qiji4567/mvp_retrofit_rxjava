@@ -12,7 +12,7 @@ public final class ApiClient {
 
     private static volatile String baseUrl;
     private static volatile Retrofit retrofit;
-    private static volatile ApiService apiService;
+    private static volatile ApiBusinessService apiBusinessService;
 
     private ApiClient() {
     }
@@ -24,7 +24,7 @@ public final class ApiClient {
     public static synchronized void setBaseUrl(String url) {
         String finalUrl = normalizeBaseUrl(url);
 
-        if (finalUrl.equals(baseUrl) && retrofit != null && apiService != null) {
+        if (finalUrl.equals(baseUrl) && retrofit != null && apiBusinessService != null) {
             return;
         }
 
@@ -47,14 +47,14 @@ public final class ApiClient {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        apiService = retrofit.create(ApiService.class);
+        apiBusinessService = retrofit.create(ApiBusinessService.class);
     }
 
-    public static ApiService getApiService() {
-        if (apiService == null) {
+    public static ApiBusinessService getApiService() {
+        if (apiBusinessService == null) {
             throw new IllegalStateException("ApiClient 未初始化，请先在 MyApplication.onCreate() 调用 ApiClient.init(baseUrl)");
         }
-        return apiService;
+        return apiBusinessService;
     }
 
     public static String getBaseUrl() {

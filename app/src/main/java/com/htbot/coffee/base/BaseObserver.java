@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.htbot.coffee.base.interfaces.BaseView;
 import com.htbot.coffee.utils.NetworkUtils;
-import io.reactivex.observers.DisposableObserver;
+
+import io.reactivex.rxjava3.observers.DisposableObserver;
+
 
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
 

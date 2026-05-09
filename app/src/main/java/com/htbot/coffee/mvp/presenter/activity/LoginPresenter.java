@@ -10,10 +10,9 @@ import com.htbot.coffee.base.interfaces.BasePresenter;
 import com.htbot.coffee.mvp.MobileCountModel;
 import com.htbot.coffee.mvp.presenter.contract.BaseContractView;
 import com.htbot.coffee.net.ApiClient;
-import com.htbot.coffee.net.ApiService;
-import com.htbot.coffee.net.BaseBean;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import com.htbot.coffee.net.ResponseData;
+import com.htbot.coffee.net.api.BusinessApi;
+import com.htbot.coffee.net.api.OperationApi;
 
 /**
  * @author 53443
@@ -21,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginPresenter extends RxPresenter<BaseContractView<Object>>
         implements BasePresenter<BaseContractView<Object>> {
 
-    private final ApiService mAppApi;
+    private final OperationApi mAppApi;
     private final Context mContext;
 
     public LoginPresenter(Context context) {
@@ -33,9 +32,9 @@ public class LoginPresenter extends RxPresenter<BaseContractView<Object>>
         addSubscribe(mAppApi.login(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<BaseBean<MobileCountModel>>(mContext, mView) {
+                .subscribeWith(new BaseObserver<ResponseData<MobileCountModel>>(mContext, mView) {
                     @Override
-                    public void onNext(BaseBean<MobileCountModel> bean) {
+                    public void onNext(ResponseData<MobileCountModel> bean) {
                         super.onNext(bean);
                         if (bean != null && bean.getCode() == 200) {
                             mView.updateUi(bean.getData(), 0);

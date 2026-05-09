@@ -3,7 +3,7 @@ package com.htbot.coffee.activity;
 import android.view.View;
 
 import com.htbot.coffee.R;
-import com.htbot.coffee.base.BaseMVPActivity;
+import com.htbot.coffee.base.BaseMvpActivity;
 import com.htbot.coffee.databinding.ActivityMainBinding;
 import com.htbot.coffee.mvp.presenter.activity.MainPresenter;
 import com.htbot.coffee.mvp.presenter.contract.BaseContractView;
@@ -11,11 +11,11 @@ import com.htbot.coffee.mvp.presenter.contract.BaseContractView;
 /**
  * @author 53443
  */
-public class MainActivity extends BaseMVPActivity<ActivityMainBinding,MainPresenter> implements BaseContractView<Object> {
+public class MainActivity extends BaseMvpActivity<ActivityMainBinding, MainPresenter> implements BaseContractView<Object> {
 
     @Override
     protected MainPresenter createPresenter() {
-        return new MainPresenter( this);
+        return new MainPresenter(this);
     }
 
 
@@ -31,10 +31,11 @@ public class MainActivity extends BaseMVPActivity<ActivityMainBinding,MainPresen
         binding.tvImageview.setOnClickListener(this::onClick);
     }
 
+    @Override
     public void onClick(View view) {
-        if (super.onViewClick()) return;
-        if (view.getId() == R.id.tv_imageview)
-            startActivity(mContext, ActionBarActivity.class, false);
+        if (super.onViewClick()) {
+            return;
+        }
     }
 
     @Override
