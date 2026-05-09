@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import androidx.viewbinding.ViewBinding;
+
 import cn.mrr.liubei.activity.ExitActivity;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.base.interfaces.BaseView;
 import cn.mrr.liubei.dialog.LoadingDialog;
 
-public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActivity implements BaseView {
+public abstract class BaseMVPActivity<VB extends ViewBinding, T extends BasePresenter>
+        extends BaseActivity<VB> implements BaseView {
 
     protected T mPresenter;
 
@@ -18,6 +21,7 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
+
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);
@@ -28,7 +32,9 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
     protected void onDestroy() {
         if (mPresenter != null) {
             mPresenter.detachView();
+            mPresenter = null;
         }
+
         super.onDestroy();
     }
 

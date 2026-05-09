@@ -1,25 +1,25 @@
 package cn.mrr.liubei.fragment;
 
-import cn.mrr.liubei.R;
-import cn.mrr.liubei.activity.ImageViewActivity;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
+import cn.mrr.liubei.activity.ActionBarActivity;
 import cn.mrr.liubei.base.BaseFragment;
 import cn.mrr.liubei.databinding.Layout1Binding;
 
 /**
  * @author 53443
  */
-public class FirstFragment extends BaseFragment {
-    private Layout1Binding binding;
+public class FirstFragment extends BaseFragment<Layout1Binding> {
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.layout1;
+    protected Layout1Binding getViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return Layout1Binding.inflate(inflater, container, false);
     }
 
     @Override
     protected void initialize() {
-        binding = Layout1Binding.bind(mView);
-        binding.text.setOnClickListener(v -> startActivity(mActivity, ImageViewActivity.class, false));
+        binding.text.setOnClickListener(v -> startActivity(mActivity, ActionBarActivity.class, false));
     }
 
 

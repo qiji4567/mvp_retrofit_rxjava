@@ -7,17 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
-public abstract class BaseFragment extends Fragment {
-    protected View mView;
+public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
+
+    protected VB binding;
     protected AppCompatActivity mActivity;
     protected Context mContext;
     protected boolean isInited = false;
 
-    protected abstract int getLayoutId();
+    protected abstract VB getViewBinding(LayoutInflater inflater, ViewGroup container);
 
     protected abstract void initialize();
 
@@ -30,30 +33,40 @@ public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(getLayoutId(), container, false);
-        return mView;
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState
+    ) {
+        binding = getViewBinding(inflater, container);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (!isInited) {
             isInited = true;
             initialize();
         }
     }
 
+    public VB getBinding() {
+        return binding;
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mView = null;
+        binding = null;
     }
 
     public void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
         Intent intent = new Intent();
         intent.setClass(from, to);
         startActivity(intent);
+
         if (isFinish) {
             from.finish();
         }
@@ -61,11 +74,14 @@ public abstract class BaseFragment extends Fragment {
 
     protected void startActivity(AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
         Intent intent = new Intent();
+
         if (bundle != null) {
             intent.putExtras(bundle);
         }
+
         intent.setClass(from, to);
         startActivity(intent);
+
         if (isFinish) {
             from.finish();
         }

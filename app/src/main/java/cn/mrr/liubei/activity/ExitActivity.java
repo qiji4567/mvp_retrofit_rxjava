@@ -4,18 +4,26 @@ import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
 
+import androidx.viewbinding.ViewBinding;
+
 import cn.mrr.liubei.R;
 import cn.mrr.liubei.base.BaseActivity;
 import cn.mrr.liubei.databinding.ActivityExitBinding;
 import cn.mrr.liubei.manager.AppActivityTaskManager;
 
-public class ExitActivity extends BaseActivity {
-    private ActivityExitBinding binding;
+/**
+ * @author 53443
+ */
+public class ExitActivity extends BaseActivity<ActivityExitBinding> {
 
-    @Override protected int getLayoutId() { return R.layout.activity_exit; }
 
-    @Override protected void initialize() {
-        binding = ActivityExitBinding.bind(getContentView());
+    @Override
+    protected ActivityExitBinding getViewBinding() {
+        return ActivityExitBinding.inflate(getLayoutInflater());
+    }
+
+    @Override
+    protected void initialize() {
         binding.tvDeExit.setOnClickListener(this::onViewClick);
         binding.tvDeLogBack.setOnClickListener(this::onViewClick);
     }
@@ -32,7 +40,8 @@ public class ExitActivity extends BaseActivity {
         }
     }
 
-    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) return false;
         return super.onKeyDown(keyCode, event);
     }

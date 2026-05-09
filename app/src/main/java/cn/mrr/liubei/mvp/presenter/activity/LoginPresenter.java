@@ -18,8 +18,8 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author 53443
  */
-public class LoginPresenter extends RxPresenter<BaseContractView<MobileCountModel>>
-        implements BasePresenter<BaseContractView<MobileCountModel>> {
+public class LoginPresenter extends RxPresenter<BaseContractView<Object>>
+        implements BasePresenter<BaseContractView<Object>> {
 
     private final ApiService mAppApi;
     private final Context mContext;

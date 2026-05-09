@@ -7,16 +7,15 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBinding;
 
 import cn.mrr.liubei.activity.ExitActivity;
 import cn.mrr.liubei.base.interfaces.BasePresenter;
 import cn.mrr.liubei.base.interfaces.BaseView;
 import cn.mrr.liubei.dialog.LoadingDialog;
 
-/**
- * @author 53443
- */
-public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragment implements BaseView {
+public abstract class BaseMVPFragment<VB extends ViewBinding, T extends BasePresenter>
+        extends BaseFragment<VB> implements BaseView {
 
     protected T mPresenter;
 
@@ -29,6 +28,7 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
             showMsg("请不要频繁点击");
             return true;
         }
+
         clickTime = System.currentTimeMillis();
         return false;
     }
@@ -36,6 +36,7 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mPresenter = createPresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);
@@ -46,7 +47,9 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
     public void onDestroyView() {
         if (mPresenter != null) {
             mPresenter.detachView();
+            mPresenter = null;
         }
+
         super.onDestroyView();
     }
 
@@ -88,5 +91,28 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
         LoadingDialog.getInstance().dismissProgress();
     }
 
+    public void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
+        Intent intent = new Intent();
+        intent.setClass(from, to);
+        startActivity(intent);
 
+        if (isFinish) {
+            from.finish();
+        }
+    }
+
+    protected void startActivity(AppCompatActivity from, Class<?> to, Bundle bundle, boolean isFinish) {
+        Intent intent = new Intent();
+
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+
+        intent.setClass(from, to);
+        startActivity(intent);
+
+        if (isFinish) {
+            from.finish();
+        }
+    }
 }

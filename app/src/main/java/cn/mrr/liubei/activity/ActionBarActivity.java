@@ -2,6 +2,7 @@ package cn.mrr.liubei.activity;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +15,18 @@ import cn.mrr.liubei.fragment.FirstFragment;
 import cn.mrr.liubei.fragment.SecondFragment;
 import cn.mrr.liubei.fragment.ThirdFragment;
 
-public class ActionBarActivity extends BaseActivity {
-    private ActivityActionBarBinding binding;
+/**
+ * @author 53443
+ */
+public class ActionBarActivity extends BaseActivity<ActivityActionBarBinding> {
 
-    @Override protected int getLayoutId() { return R.layout.activity_action_bar; }
+
+    @Override
+    protected ActivityActionBarBinding getViewBinding() {
+        return ActivityActionBarBinding.inflate(getLayoutInflater());
+    }
 
     @Override protected void initialize() {
-        binding = ActivityActionBarBinding.bind(getContentView());
         FragmentManager fragmentManager = getSupportFragmentManager();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FirstFragment());

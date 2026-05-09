@@ -8,22 +8,24 @@ import cn.mrr.liubei.databinding.ActivityMainBinding;
 import cn.mrr.liubei.mvp.presenter.activity.MainPresenter;
 import cn.mrr.liubei.mvp.presenter.contract.BaseContractView;
 
-public class MainActivity extends BaseMVPActivity<MainPresenter> implements BaseContractView<Object> {
-    private ActivityMainBinding binding;
+/**
+ * @author 53443
+ */
+public class MainActivity extends BaseMVPActivity<ActivityMainBinding,MainPresenter> implements BaseContractView<Object> {
 
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter( this);
     }
 
+
     @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
+    protected ActivityMainBinding getViewBinding() {
+        return ActivityMainBinding.inflate(getLayoutInflater());
     }
 
     @Override
     protected void initialize() {
-        binding = ActivityMainBinding.bind(getContentView());
         showReturn();
         setTitle("首页");
         binding.tvImageview.setOnClickListener(this::onClick);
