@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-import com.htbot.coffee.activity.ExitActivity;
+import com.htbot.coffee.ui.business.activity.ExitActivity;
 import com.htbot.coffee.base.interfaces.BasePresenter;
 import com.htbot.coffee.base.interfaces.BaseView;
 import com.htbot.coffee.dialog.LoadingDialog;

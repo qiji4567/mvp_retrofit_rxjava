@@ -1,4 +1,4 @@
-package com.htbot.coffee.adapter;
+package com.htbot.coffee.ui.business.adapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;

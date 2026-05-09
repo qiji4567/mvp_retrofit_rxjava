@@ -1,4 +1,4 @@
-package com.htbot.coffee.adapter;
+package com.htbot.coffee.ui.business.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

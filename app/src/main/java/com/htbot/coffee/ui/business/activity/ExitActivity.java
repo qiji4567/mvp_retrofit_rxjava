@@ -1,4 +1,4 @@
-package com.htbot.coffee.activity;
+package com.htbot.coffee.ui.business.activity;
 
 import android.content.Intent;
 import android.view.KeyEvent;

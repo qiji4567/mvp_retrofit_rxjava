@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.htbot.coffee.MyApplication;
 import com.htbot.coffee.R;
-import com.htbot.coffee.adapter.CheckDeviceAdapter;
+import com.htbot.coffee.ui.operation.adapter.CheckDeviceAdapter;
 import com.htbot.coffee.api.OperationApi;
 import com.htbot.coffee.base.BaseFragment;
 import com.htbot.coffee.databinding.FragmentCheckBinding;

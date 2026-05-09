@@ -1,8 +1,7 @@
-package com.htbot.coffee.activity;
+package com.htbot.coffee.ui.business.activity;
 
 import android.view.View;
 
-import com.htbot.coffee.R;
 import com.htbot.coffee.base.BaseMvpActivity;
 import com.htbot.coffee.databinding.ActivityMainBinding;
 import com.htbot.coffee.mvp.presenter.activity.MainPresenter;

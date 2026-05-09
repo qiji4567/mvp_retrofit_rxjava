@@ -6,7 +6,7 @@ package com.htbot.coffee.net;
 public class ResponseData<T> {
 
     private int code;
-    private String msg;
+    private String message;
     private T data;
     private Boolean success;
 
@@ -26,12 +26,13 @@ public class ResponseData<T> {
         this.success = success;
     }
 
-    public String getMsg() {
-        return msg;
+
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {

@@ -10,9 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-import com.htbot.coffee.R;
-import com.htbot.coffee.databinding.BaseActivityBinding;
-import com.htbot.coffee.databinding.BaseTitleBinding;
 import com.htbot.coffee.manager.AppActivityTaskManager;
 
 /**
@@ -23,8 +20,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
     private long clickTime = 0;
 
     protected AppCompatActivity mContext;
-    protected BaseActivityBinding baseBinding;
-    protected BaseTitleBinding titleBinding;
     protected VB binding;
 
     protected abstract VB getViewBinding();
@@ -41,24 +36,15 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         initLayout();
 
         onViewCreated();
-        AppActivityTaskManager.getInstance().addActivity(this);
+
         create(savedInstanceState);
         initialize();
     }
 
     private void initLayout() {
-        baseBinding = BaseActivityBinding.inflate(getLayoutInflater());
-        setContentView(baseBinding.getRoot());
-
         binding = getViewBinding();
-        baseBinding.getRoot().addView(binding.getRoot());
-
-        try {
-            titleBinding = BaseTitleBinding.bind(binding.getRoot());
-        } catch (RuntimeException ignored) {
-            titleBinding = null;
-        }
-
+        setContentView(binding.getRoot());
+        AppActivityTaskManager.getInstance().addActivity(this);
         setStatusBar();
     }
 
@@ -84,33 +70,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
     protected void setStatusBar() {
     }
 
-    public void showReturn() {
-        if (titleBinding != null) {
-            titleBinding.ivBtReturn.setVisibility(View.VISIBLE);
-            titleBinding.ivBtReturn.setOnClickListener(this);
-        }
-    }
-
-    public void setTitle(String title) {
-        if (titleBinding != null) {
-            titleBinding.tvBtTitle.setText(title);
-        }
-    }
-
-    public void showRightButton(String value, int color) {
-        if (titleBinding != null) {
-            titleBinding.tvBtRight.setVisibility(View.VISIBLE);
-            titleBinding.tvBtRight.setText(value);
-            titleBinding.tvBtRight.setTextColor(color);
-            titleBinding.tvBtRight.setOnClickListener(this);
-        }
-    }
-
-    public void showRightButton(boolean isShow) {
-        if (titleBinding != null) {
-            titleBinding.tvBtRight.setVisibility(isShow ? View.VISIBLE : View.GONE);
-        }
-    }
 
     public void rightClick() {
     }
@@ -119,11 +78,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
     public void onClick(View v) {
         int id = v.getId();
 
-        if (id == R.id.iv_bt_return) {
-            finish();
-        } else if (id == R.id.tv_bt_right) {
-            rightClick();
-        }
     }
 
     protected void onViewCreated() {
@@ -135,8 +89,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         AppActivityTaskManager.getInstance().removeActivity(this);
 
         binding = null;
-        baseBinding = null;
-        titleBinding = null;
+
     }
 
     @Override
@@ -149,7 +102,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         return super.onOptionsItemSelected(item);
     }
 
-    public void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
+    protected void startActivity(AppCompatActivity from, Class<?> to, boolean isFinish) {
         Intent intent = new Intent(from, to);
         startActivity(intent);
         if (isFinish) {

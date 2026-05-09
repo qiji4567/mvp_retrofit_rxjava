@@ -14,14 +14,14 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.htbot.coffee.MyApplication;
 import com.htbot.coffee.R;
-import com.htbot.coffee.api.OperationApi;
+import com.htbot.coffee.application.MyApplication;
 import com.htbot.coffee.base.BaseActivity;
 import com.htbot.coffee.databinding.ActivityLoginBinding;
-import com.htbot.coffee.util.AESUtils;
-import com.htbot.coffee.util.KeyboardUtil;
-import com.htbot.coffee.util.ThemeUtils;
+import com.htbot.coffee.net.api.OperationApi;
+import com.htbot.coffee.utils.AESUtils;
+import com.htbot.coffee.utils.KeyboardUtil;
+import com.htbot.coffee.utils.ThemeUtils;
 
 import java.util.HashMap;
 

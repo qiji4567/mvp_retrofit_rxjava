@@ -11,7 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.htbot.coffee.MyApplication;
 import com.htbot.coffee.R;
-import com.htbot.coffee.adapter.BackgroundAdapter;
+import com.htbot.coffee.ui.operation.adapter.BackgroundAdapter;
 import com.htbot.coffee.base.BaseFragment;
 import com.htbot.coffee.databinding.FragmentThemeSettingBinding;
 import com.htbot.coffee.entity.BackgroundBean;

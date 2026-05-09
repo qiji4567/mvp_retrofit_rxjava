@@ -20,7 +20,7 @@ import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.htbot.coffee.MyApplication;
 import com.htbot.coffee.R;
-import com.htbot.coffee.adapter.OperateMenuLeftAdapter;
+import com.htbot.coffee.ui.operation.adapter.OperateMenuLeftAdapter;
 import com.htbot.coffee.api.OperationApi;
 import com.htbot.coffee.base.BaseActivity;
 import com.htbot.coffee.databinding.ActivityOperationMainBinding;
