@@ -1,14 +1,17 @@
 package com.htbot.coffee.base;
 
-import javax.inject.Inject;
 
 import com.google.gson.Gson;
 
 import com.htbot.coffee.base.interfaces.BasePresenter;
 import com.htbot.coffee.base.interfaces.BaseView;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+
+/**
+ * @author 53443
+ */
 public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     protected T mView;
@@ -17,7 +20,7 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     public Gson gson;
 
-    @Inject
+
     public RxPresenter() {
         if (null == gson) {
             gson = new Gson();

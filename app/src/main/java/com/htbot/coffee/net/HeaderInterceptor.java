@@ -8,17 +8,28 @@ import okhttp3.Response;
 
 public class HeaderInterceptor implements Interceptor {
 
+    private static volatile String token;
+
+    public static void setToken(String value) {
+        token = value;
+    }
+
+    public static void clearToken() {
+        token = null;
+    }
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request oldRequest = chain.request();
 
-        Request newRequest = oldRequest.newBuilder()
+        Request.Builder builder = oldRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
-                // 以后有 token 可以在这里加：
-                // .header("Authorization", "Bearer " + TokenManager.getToken())
-                .build();
+                .header("Accept", "application/json");
 
-        return chain.proceed(newRequest);
+        if (token != null && token.length() > 0) {
+            builder.header("Authorization", "Bearer " + token);
+        }
+
+        return chain.proceed(builder.build());
     }
 }
