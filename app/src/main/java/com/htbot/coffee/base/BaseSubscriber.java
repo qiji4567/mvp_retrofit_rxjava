@@ -5,8 +5,12 @@ import android.content.Context;
 
 import com.htbot.coffee.base.interfaces.BaseView;
 import com.htbot.coffee.utils.NetworkUtils;
-import io.reactivex.subscribers.ResourceSubscriber;
 
+import io.reactivex.rxjava3.subscribers.ResourceSubscriber;
+
+/**
+ * @author 53443
+ */
 public abstract class BaseSubscriber<T> extends ResourceSubscriber<T> {
 
     private Context context;

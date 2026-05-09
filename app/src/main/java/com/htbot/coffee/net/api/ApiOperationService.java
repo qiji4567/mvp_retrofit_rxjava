@@ -16,7 +16,7 @@ public interface ApiOperationService {
     Observable<ResponseData> login(@Body RequestBody body);
 
     @GET("/gw/v1/user/login/getRsaPublicKey")
-    Observable<ResponseData> getPublicKey();
+    Observable<ResponseData<String>> getPublicKey();
 
     @GET("/gw/v1/user/device/detail")
     Observable<ResponseData> getDeviceDetail(@Query("id") String id);

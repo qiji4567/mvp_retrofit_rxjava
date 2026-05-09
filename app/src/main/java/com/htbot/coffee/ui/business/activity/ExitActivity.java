@@ -8,6 +8,7 @@ import com.htbot.coffee.R;
 import com.htbot.coffee.base.BaseActivity;
 import com.htbot.coffee.databinding.ActivityExitBinding;
 import com.htbot.coffee.manager.AppActivityTaskManager;
+import com.htbot.coffee.ui.operation.LoginActivity;
 
 /**
  * @author 53443

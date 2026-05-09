@@ -5,12 +5,14 @@
     <color name="grey">#A29D9D</color>
     <color name="transparent">#00000000</color>
     <color name="color_66666">#666666</color>
+    <color name="background">#f5f5f5</color>
     <color name="color_f5">#f5f5f5</color>
     <color name="homeColor">#f3f3f3</color>
     <color name="colorDark">#313131</color>
     <color name="color999">#999999</color>
     <color name="colorLine">#cccccc</color>
     <color name="color_333333">#333333</color>
+    <color name="_333333">#333333</color>
 
     <color name="green_btn">#19C46E</color>
     <color name="color_80000000">#80000000</color>
@@ -18,12 +20,26 @@
     <color name="color_ff2d5e">#3377ff</color>
     <color name="main">#3377ff</color>
     <color name="_888888">#888888</color>
-    <color name="white_transparent_bg_2">#4DEEEEEE</color><!--白色半透明 二-->
+    <color name="white_transparent_bg_2">#4DEEEEEE</color>
     <color name="color_red">#FF0000</color>
     <color name="color_click">#ff92532a</color>
     <color name="color_aaa">#aaaaaa</color>
     <color name="yellow">#000000</color>
     <color name="color_5d4037">#5D4037</color>
     <color name="color_666666">#666666</color>
+    <color name="_F8F8F8">#F8F8F8</color>
+
+    <!-- Material Design 主题颜色 -->
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="light_gray">#D3D3D3</color>
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="yello">#FBA238</color>
+    <color name="blue">#1E40AF</color>
+    <color name="_35C2BC">#35C2BC</color>
 
 </resources>

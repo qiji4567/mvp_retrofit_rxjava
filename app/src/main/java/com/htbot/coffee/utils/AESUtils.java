@@ -256,7 +256,7 @@ public class AESUtils {
         return dataJson.toString();
     }
 
-    public static String createRequestOperateBody(HashMap<String, Object> postMap) {
+    public static String createRequestOperateBody(Map<String, Object> postMap) {
         // 创建 Data 对象
         JSONObject dataJson = new JSONObject();
         try {

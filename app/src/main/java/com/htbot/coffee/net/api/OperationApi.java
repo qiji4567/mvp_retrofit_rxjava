@@ -18,7 +18,7 @@ public final class OperationApi {
         return ApiClient.operationService().login(body);
     }
 
-    public static Observable<ResponseData> getPublicKey() {
+    public static Observable<ResponseData<String>> getPublicKey() {
         return ApiClient.operationService().getPublicKey();
     }
 

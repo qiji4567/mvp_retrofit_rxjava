@@ -2,59 +2,147 @@ package com.htbot.coffee.mvp.presenter.activity;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-import com.htbot.coffee.base.BaseObserver;
+import com.blankj.utilcode.util.StringUtils;
+import com.htbot.coffee.application.MyApplication;
 import com.htbot.coffee.base.RxPresenter;
-import com.htbot.coffee.base.interfaces.BasePresenter;
-import com.htbot.coffee.mvp.MobileCountModel;
-import com.htbot.coffee.mvp.presenter.contract.BaseContractView;
-import com.htbot.coffee.net.LoginRequest;
+import com.htbot.coffee.mvp.presenter.contract.LoginContract;
 import com.htbot.coffee.net.ResponseData;
 import com.htbot.coffee.net.api.OperationApi;
+import com.htbot.coffee.utils.AESUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class LoginPresenter extends RxPresenter<BaseContractView<Object>>
-        implements BasePresenter<BaseContractView<Object>> {
+/**
+ * 登录 Presenter
+ * <p>
+ * 负责：
+ * 1. 登录参数校验
+ * 2. 获取公钥
+ * 3. 加密密码
+ * 4. 调用登录接口
+ * 5. 通知 View 刷新 UI
+ *
+ * @author 53443
+ */
+public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter {
 
-    private final Context mContext;
-    private final Gson gson = new Gson();
+    private static final String PLATFORM_ANDROID = "android";
+    private static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
-    public LoginPresenter(Context context) {
-        this.mContext = context.getApplicationContext();
+    private final Context appContext;
+
+    public LoginPresenter(@NonNull Context context) {
+        this.appContext = context.getApplicationContext();
     }
 
-    public void login(@Nullable String username, @Nullable String password) {
-        LoginRequest request = new LoginRequest(username, password);
-        String json = gson.toJson(request);
+    @Override
+    public void login(@Nullable String account, @Nullable String password) {
+        String finalAccount = account == null ? "" : account.trim();
+        String finalPassword = password == null ? "" : password.trim();
 
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+        if (StringUtils.isEmpty(finalAccount)) {
+            if (isViewAttached()) {
+                mView.onUsernameEmpty();
+            }
+            return;
+        }
 
-        addSubscribe(OperationApi.login(body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<ResponseData>(mContext, mView) {
-                    @Override
-                    public void onNext(ResponseData bean) {
-                        super.onNext(bean);
+        if (StringUtils.isEmpty(finalPassword)) {
+            if (isViewAttached()) {
+                mView.onPasswordEmpty();
+            }
+            return;
+        }
 
-                        if (bean != null && bean.getCode() == 200) {
-                            mView.updateUi(bean.getData(), 0);
-                        } else {
-                            mView.showError(bean == null ? "服务器返回为空" : bean.getMsg());
-                        }
-                    }
+        if (isViewAttached()) {
+            mView.startLoading();
+        }
 
-                    @Override
-                    public void onError() {
-                        super.onError();
-                        mView.showError("网络处理异常");
-                    }
-                }));
+        addSubscribe(
+                OperationApi.getPublicKey()
+                        .subscribeOn(Schedulers.io())
+                        .flatMap(publicKeyResponse -> {
+                            String publicKey = publicKeyResponse == null ? null : publicKeyResponse.getData();
+
+                            if (StringUtils.isEmpty(publicKey)) {
+                                throw new IllegalStateException("公钥获取失败");
+                            }
+
+                            RequestBody requestBody = buildLoginRequestBody(finalAccount, finalPassword, publicKey);
+                            return OperationApi.login(requestBody);
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                response -> {
+                                    if (!isViewAttached()) {
+                                        return;
+                                    }
+
+                                    mView.stopLoading();
+                                    handleLoginResponse(response);
+                                },
+                                throwable -> {
+                                    if (!isViewAttached()) {
+                                        return;
+                                    }
+
+                                    mView.stopLoading();
+                                    String message = throwable == null || StringUtils.isEmpty(throwable.getMessage())
+                                            ? "网络异常，请稍后重试"
+                                            : throwable.getMessage();
+                                    mView.showError(message);
+                                }
+                        )
+        );
+    }
+
+    private RequestBody buildLoginRequestBody(
+            @NonNull String account,
+            @NonNull String password,
+            @NonNull String publicKey
+    ) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("account", account);
+        params.put("password", AESUtils.encryptUserAndPwd(password, publicKey));
+        params.put("serialNumber", MyApplication.instance.getSerialNumber());
+        params.put("platform", PLATFORM_ANDROID);
+
+        String bodyJson = AESUtils.createRequestOperateBody(params);
+
+        return RequestBody.create(
+                MediaType.parse(MEDIA_TYPE_JSON),
+                bodyJson
+        );
+    }
+
+    private void handleLoginResponse(ResponseData response) {
+        if (response == null) {
+            mView.showError("服务器返回为空");
+            return;
+        }
+
+        if (response.getSuccess() && !StringUtils.isEmpty(String.valueOf(response.getData()))) {
+            mView.onLoginSuccess(String.valueOf(response.getData()));
+            return;
+        }
+
+        String message = response.getMessage();
+        if (StringUtils.isEmpty(message)) {
+            message = "登录失败，请检查账号或密码";
+        }
+        mView.showError(message);
+    }
+
+    private boolean isViewAttached() {
+        return mView != null;
     }
 }
