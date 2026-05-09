@@ -1,5 +1,6 @@
 package com.htbot.coffee.net.api;
 
+import com.htbot.coffee.mvp.module.DeviceInfoBean;
 import com.htbot.coffee.net.ApiClient;
 import com.htbot.coffee.net.ResponseData;
 
@@ -75,7 +76,7 @@ public final class BusinessApi {
         return ApiClient.businessService().deviceEventRecord(body);
     }
 
-    public static Observable<ResponseData> getDeviceDetail(RequestBody body) {
+    public static Observable<ResponseData<DeviceInfoBean>> getDeviceDetail(RequestBody body) {
         return ApiClient.businessService().getDeviceDetail(body);
     }
 

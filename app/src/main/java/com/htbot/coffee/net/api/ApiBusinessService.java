@@ -1,5 +1,6 @@
 package com.htbot.coffee.net.api;
 
+import com.htbot.coffee.mvp.module.DeviceInfoBean;
 import com.htbot.coffee.net.ResponseData;
 
 
@@ -59,7 +60,7 @@ public interface ApiBusinessService {
     Observable<ResponseData> deviceEventRecord(@Body RequestBody body);
 
     @POST("/gw/v4/user/device/detail")
-    Observable<ResponseData> getDeviceDetail(@Body RequestBody body);
+    Observable<ResponseData<DeviceInfoBean>> getDeviceDetail(@Body RequestBody body);
 
     @POST("/gw/v4/user/login/operaAnyOne")
     Observable<ResponseData> deviceOperaAnyOne(@Body RequestBody body);

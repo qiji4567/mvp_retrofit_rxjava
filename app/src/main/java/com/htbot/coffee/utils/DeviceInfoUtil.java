@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.blankj.utilcode.util.SPStaticUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.htbot.coffee.entity.DeviceInfoBean;
+import com.htbot.coffee.mvp.module.DeviceInfoBean;
 
 public class DeviceInfoUtil {
 

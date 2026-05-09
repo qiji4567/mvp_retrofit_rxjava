@@ -33,10 +33,7 @@ public class LoginPresenter extends RxPresenter<BaseContractView<Object>>
         LoginRequest request = new LoginRequest(username, password);
         String json = gson.toJson(request);
 
-        RequestBody body = RequestBody.create(
-                MediaType.parse("application/json; charset=utf-8"),
-                json
-        );
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
         addSubscribe(OperationApi.login(body)
                 .subscribeOn(Schedulers.io())

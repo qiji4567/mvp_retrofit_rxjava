@@ -8,8 +8,9 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.htbot.coffee.R;
-import com.htbot.coffee.api.BusinessApi;
-import com.htbot.coffee.entity.DeviceInfoBean;
+import com.htbot.coffee.mvp.module.DeviceInfoBean;
+import com.htbot.coffee.net.ApiClient;
+import com.htbot.coffee.net.api.BusinessApi;
 import com.htbot.coffee.utils.AESUtils;
 import com.htbot.coffee.utils.DeviceInfoUtil;
 import com.htbot.coffee.utils.GrpcManager;
@@ -17,15 +18,16 @@ import com.htbot.coffee.utils.GsonUtils;
 import com.htbot.coffee.utils.LogUtils;
 import com.htbot.coffee.utils.MultiLanguageUtil;
 import com.htbot.coffee.utils.WebSocketManager;
-import com.htbot.coffee.utils.request.HttpClient;
 import com.htbot.coffee.utils.request.NetworkDialogManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.RequestBody;
 
+/**
+ * @author 53443
+ */
 public class MyApplication extends Application {
     public String serialNumber = "";
     public Integer equipmentId;
@@ -78,7 +80,7 @@ public class MyApplication extends Application {
                 MyApplication.instance.serialNumber = msgContent.get("deviceId");
                 MyApplication.instance.TOKEN = msgContent.get("token");
                 MyApplication.instance.Base_URL = msgContent.get("cloud");
-                RetrofitUrlManager.getInstance().setGlobalDomain(MyApplication.instance.Base_URL);
+                ApiClient.setBaseUrl(MyApplication.instance.getBase_URL());
 
                 Map<String, String> versionMsg = new HashMap<>();
                 versionMsg.put("version", version);
@@ -95,7 +97,7 @@ public class MyApplication extends Application {
                         }).subscribe(
                                 responseData -> {
                                     if (responseData.getSuccess()) {
-                                        DeviceInfoBean deviceInfoBean = new Gson().fromJson(responseData.getData(), DeviceInfoBean.class);
+                                        DeviceInfoBean deviceInfoBean = responseData.getData();
                                         DeviceInfoUtil.setDeviceInfo(deviceInfoBean);
                                         MyApplication.instance.equipmentId = deviceInfoBean.getId();
                                         MyApplication.instance.corpId = deviceInfoBean.getOrgId();

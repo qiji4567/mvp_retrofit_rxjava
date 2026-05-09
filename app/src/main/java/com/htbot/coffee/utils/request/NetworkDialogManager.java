@@ -1,4 +1,4 @@
-package com.htbot.coffee.net.request;
+package com.htbot.coffee.utils.request;
 
 import android.app.Activity;
 import android.content.Context;

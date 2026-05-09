@@ -1,8 +1,8 @@
 package com.htbot.coffee.utils;
 
 import com.blankj.utilcode.util.ArrayUtils;
-import com.htbot.coffee.MyApplication;
-import com.htbot.coffee.entity.MakingOrderBean;
+import com.htbot.coffee.application.MyApplication;
+import com.htbot.coffee.mvp.module.MakingOrderBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;

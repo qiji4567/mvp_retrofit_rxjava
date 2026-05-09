@@ -1,0 +1,12 @@
+<!-- res/drawable/layered_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 原始背景（图片或其他Drawable） -->
+    <item android:drawable="@drawable/ic_theme_1" />
+
+    <!-- 半透明颜色层（用于RGB+Alpha调节） -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" /> <!-- 初始透明 -->
+        </shape>
+    </item>
+</layer-list>
