@@ -1,7 +1,7 @@
 ext {
     // 基础版本
     android = [
-            applicationId    : "cn.mrr.liubei",
+            applicationId    : "com.htbot.coffee",
             compileSdkVersion: 35,
             minSdkVersion    : 26,
             targetSdkVersion : 35,

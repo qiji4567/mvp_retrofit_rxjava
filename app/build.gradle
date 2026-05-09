@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'cn.mrr.liubei'
+    namespace 'com.htbot.coffee'
     compileSdk rootProject.ext.android["compileSdkVersion"]
 
     defaultConfig {
