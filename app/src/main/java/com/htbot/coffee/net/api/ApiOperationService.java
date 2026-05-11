@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface ApiOperationService {
 
     @POST("/gw/v1/user/login/login")
-    Observable<ResponseData> login(@Body RequestBody body);
+    Observable<ResponseData<String>> login(@Body RequestBody body);
 
     @GET("/gw/v1/user/login/getRsaPublicKey")
     Observable<ResponseData<String>> getPublicKey();

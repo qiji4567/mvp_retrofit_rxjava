@@ -14,7 +14,7 @@ public final class OperationApi {
     private OperationApi() {
     }
 
-    public static Observable<ResponseData> login(RequestBody body) {
+    public static Observable<ResponseData<String>> login(RequestBody body) {
         return ApiClient.operationService().login(body);
     }
 

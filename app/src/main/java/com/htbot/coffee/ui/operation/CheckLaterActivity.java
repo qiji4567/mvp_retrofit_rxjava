@@ -15,8 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.htbot.coffee.MyApplication;
+
 import com.htbot.coffee.R;
+import com.htbot.coffee.application.MyApplication;
 import com.htbot.coffee.ui.operation.adapter.CategorySpinnerAdapter;
 import com.htbot.coffee.ui.operation.adapter.CheckHistoryAdapter;
 import com.htbot.coffee.api.OperationApi;
@@ -25,9 +26,9 @@ import com.htbot.coffee.databinding.ActivityCheckBinding;
 import com.htbot.coffee.entity.CheckRecordBean;
 import com.htbot.coffee.entity.CleanTypeListBean;
 import com.htbot.coffee.entity.UserInfoBean;
-import com.htbot.coffee.util.AESUtils;
-import com.htbot.coffee.util.DateUtil;
-import com.htbot.coffee.util.LanguageUtil;
+import com.htbot.coffee.utils.AESUtils;
+import com.htbot.coffee.utils.DateUtil;
+import com.htbot.coffee.utils.LanguageUtil;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
